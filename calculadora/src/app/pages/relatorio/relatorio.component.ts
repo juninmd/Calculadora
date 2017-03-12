@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-relatorio',
   templateUrl: './relatorio.component.html',
@@ -7,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RelatorioComponent {
 
-
+  constructor(private router: Router) { }
   private outros: any = [];
   private principal: any = [
     {
@@ -36,12 +36,11 @@ export class RelatorioComponent {
     },
   ];
 
-  private despesas: any = 0;
   private faturamento: any = null;
 
   private adicionar() {
     this.outros.push({
-      valor: 0,
+      valor: '',
       descricao: '',
       date: new Date()
     });
@@ -63,8 +62,10 @@ export class RelatorioComponent {
     if (this.outros.length > 0)
       this.outros.map(q => q.valor).reduce((sum, current) => sum + current);
 
-    this.despesas = ((principal + outros) / this.faturamento) * 100;
-    console.log("Primeira fórmula:", this.despesas);
+    let despesas = ((principal + outros) / this.faturamento);
+    console.log("Primeira fórmula:", despesas);
+
+    this.router.navigate(['/porcentagem', { despesas: despesas }]);
     return false;
   }
 
