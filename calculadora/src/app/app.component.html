@@ -3,54 +3,31 @@
     Calculadora
   </h4>
 
-  <div class="row">
-    <div class="col s6">
-      <h5 class="header">
-        Relatório dos custos mensais
-        <div class="input-field inline col s6">
-          <a (click)="adicionar()" class="btn-floating btn-small waves-effect waves-light red"><i class="material-icons">add</i></a>
-        </div>
-      </h5>
-    </div>
-    <div class="input-field inline col s6">
-      <input type="number" step="any" required="required" class="validate">
-      <label>Faturamento Mensal</label>
-    </div>
-  </div>
-
-  <form class="col s12">
+  <form class="col s12" #calculadoraForm="ngForm" (ngSubmit)="calcularDespesas()">
     <div class="row">
-      <div class="input-field inline col s6">
-        <input type="number" step="any" required="required" class="validate">
-        <label>Água</label>
+      <div class="col s6">
+        <h5 class="header">
+          Relatório dos custos mensais :
+          <pre>Despesas : {{despesas}}</pre>
+          <div class="input-field inline col s6">
+            <a (click)="adicionar()" class="btn-floating btn-tiny waves-effect waves-light red"><i class="material-icons">add</i></a>
+            <button type="submit" [disabled]="!calculadoraForm.form.valid" class="btn-floating btn-tiny waves-effect waves-light green"><i class="material-icons">done</i></button>
+          </div>
+        </h5>
       </div>
-
       <div class="input-field inline col s6">
-        <input type="number" step="any" required="required" class="validate">
-        <label>Luz</label>
+        <input type="number" step="any" required="required" min="0" [(ngModel)]="faturamento" name="faturamento" id="faturamento"
+          class="validate">
+        <label>Faturamento Mensal</label>
       </div>
     </div>
+
     <div class="row">
-      <div class="input-field inline col s6">
-        <input type="number" step="any" required="required" class="validate">
-        <label>Telefone</label>
+      <div class="input-field inline col s6" *ngFor="let item of principal">
+        <input type="number" step="any" [value]="item.valor" [(ngModel)]="item.valor" min="0" [id]="item.descricao" [name]="item.descricao"
+          [required]="required" class="validate">
+        <label>{{item.descricao}}</label>
       </div>
-
-      <div class="input-field inline col s6">
-        <input type="number" step="any" required="required" class="validate">
-        <label>Salário + Encargos</label>
-      </div>
-
-      <div class="input-field inline col s6">
-        <input type="number" step="any" required="required" class="validate">
-        <label>Aluguel</label>
-      </div>
-
-      <div class="input-field inline col s6">
-        <input type="number" step="any" required="required" class="validate">
-        <label>Descartáveis</label>
-      </div>
-
 
       <div *ngFor="let item of outros">
         <div>
@@ -60,10 +37,10 @@
           </div>
           <div class="input-field col s2">
             <label>Valor:</label>
-            <input type="number" step="any" required="required" class="validate">
+            <input type="number" step="any" [required]="required" [(ngModel)]="item.valor" min="0" [id]="item.descricao" [name]="item.descricao" class="validate">
           </div>
           <div class="input-field col s1">
-            <a (click)="remover(item)" class="btn-floating btn-small waves-effect waves-light red">
+            <a (click)="remover(item)" class="btn-floating btn-tiny waves-effect waves-light red">
               <i class="material-icons">remove</i>
             </a>
           </div>
