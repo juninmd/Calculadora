@@ -6,14 +6,17 @@
                     <h5 class="header">
                         Porcentagem
                     </h5>
+                    <small>ex: 0,2</small>
                 </div>
                 <div class="input-field col s2 m2">
                     <button type="submit" [disabled]="!porcentagemForm.form.valid" class="btn-floating btn-tiny waves-effect waves-light green"><i class="material-icons">done</i></button>
                 </div>
-                <div class="input-field col s6 m6">
-                    <input type="number" step="any" required="required" min="0" [(ngModel)]="precoMercadoria" name="precoMercadoria" id="precoMercadoria"
-                        class="validate">
-                    <label>Preco Mercadoria</label>
+                <div class="collection col s6 destaque">
+                    <div class="input-field col s12 m12">
+                        <input type="number" step="any" required="required" min="0" [(ngModel)]="precoMercadoria" name="precoMercadoria" id="precoMercadoria"
+                            class="validate">
+                        <label>Preco Mercadoria</label>
+                    </div>
                 </div>
 
                 <div class="input-field col s6" *ngFor="let item of principal">
@@ -21,11 +24,22 @@
                         required="required" class="validate">
                     <label class="active">{{item.descricao}}</label>
                 </div>
-                <div class="input-field col s6">
-                    <input type="text" placeholder="Valor a ser calculado" disabled [(ngModel)]="pv" id="pv" name="pv">
-                    <label class="active">PV:</label>
-                </div>
+
             </div>
         </form>
+        <footer class="page-footer">
+            <div class="semicontainer black-text">
+                <div class="row">
+                    <div class="input-field col s6">
+                        <input type="text" placeholder="Valor a ser calculado" disabled [(ngModel)]="markup" id="markup" name="markup">
+                        <label class="active">Mark-UP:</label>
+                    </div>
+                    <div class="input-field col s6">
+                        <input type="text" placeholder="Valor a ser calculado" disabled [(ngModel)]="pv" id="pv" name="pv">
+                        <label class="active">PV:</label>
+                    </div>
+                </div>
+            </div>
+        </footer>
     </div>
 </div>

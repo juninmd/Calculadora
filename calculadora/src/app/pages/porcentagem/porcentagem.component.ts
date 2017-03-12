@@ -11,13 +11,14 @@ export class PorcentagemComponent implements OnInit {
   private despesas: any = '';
   private precoMercadoria: any = '';
   private pv: any = '';
+  private markup: any = '';
 
   private principal: any = [];
 
   ngOnInit() {
     this.route.params.subscribe(params => {
       if (params['despesas'] != null)
-        this.despesas = params["despesas"];
+        this.despesas = +params["despesas"];
     });
 
     this.principal = [
@@ -47,10 +48,10 @@ export class PorcentagemComponent implements OnInit {
 
   private calcularMarkup() {
     let principal = this.principal.map(q => q.valor).reduce((sum, current) => sum + current);
-    let markup = (100 - principal) / 100;
-    console.log("Markup", markup);
+    this.markup = (100 - principal) / 100;
+    console.log("Markup", this.markup);
 
-    this.pv = (this.precoMercadoria / markup);
+    this.pv = (this.precoMercadoria / this.markup);
     console.log("PV", this.pv);
     return false;
   }

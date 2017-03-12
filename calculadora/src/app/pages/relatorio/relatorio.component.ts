@@ -60,7 +60,7 @@ export class RelatorioComponent {
     let outros = 0;
 
     if (this.outros.length > 0)
-      this.outros.map(q => q.valor).reduce((sum, current) => sum + current);
+      outros = this.outros.map(q => q.valor).reduce((sum, current) => sum + current);
 
     let despesas = ((principal + outros) / this.faturamento);
     console.log("Primeira fórmula:", despesas);

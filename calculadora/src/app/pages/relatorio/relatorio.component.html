@@ -11,10 +11,12 @@
           <a (click)="adicionar()" class="btn-floating btn-tiny waves-effect waves-light red"><i class="material-icons">add</i></a>
           <button type="submit" [disabled]="!calculadoraForm.form.valid" class="btn-floating btn-tiny waves-effect waves-light green"><i class="material-icons">done</i></button>
         </div>
-        <div class="input-field inline col s6">
-          <input type="number" step="any" required="required" min="0" [(ngModel)]="faturamento" name="faturamento" id="faturamento"
-            class="validate">
-          <label>Faturamento Mensal</label>
+        <div class="collection col s6 destaque">
+          <div class="input-field inline col s12">
+            <input type="number" step="any" required="required" min="0" [(ngModel)]="faturamento" name="faturamento" id="faturamento"
+              class="validate">
+            <label>Faturamento Mensal</label>
+          </div>
         </div>
       </div>
 
