@@ -3,14 +3,14 @@
   "version": "0.0.1",
   "license": "MIT",
   "scripts": {
-    "start": "node server.js",
+    "start": "ng server",
     "build": "ng build --base-href $npm_package_config_baseurl",
     "electron": "electron ."
   },
   "config": {
     "baseurl": "D:\\Meus Projetos\\Solutions\\Calculadora\\dist"
   },
-  "main": "server.js",
+  "main": "main.js",
   "private": true,
   "dependencies": {
     "@angular/common": "^2.4.0",
@@ -29,10 +29,7 @@
     "materialize-css": "^0.97.8",
     "rxjs": "^5.1.0",
     "sweetalert2": "^6.4.3",
-    "zone.js": "^0.7.6",
-    "consolidate": "^0.14.5",
-    "express": "^4.15.0",
-    "mustache": "^2.3.0"
+    "zone.js": "^0.7.6"
   },
   "devDependencies": {
     "@angular/cli": "1.0.0-rc.1",
