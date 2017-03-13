@@ -8,7 +8,7 @@
     "electron": "electron ."
   },
   "config": {
-    "baseurl": "D:\\Meus Projetos\\Solutions\\Calculadora\\calculadora\\dist"
+    "baseurl": "D:\\Meus Projetos\\Solutions\\Calculadora\\dist"
   },
   "main": "main.js",
   "private": true,
