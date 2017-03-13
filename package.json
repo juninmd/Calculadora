@@ -10,7 +10,7 @@
   "config": {
     "baseurl": "D:\\Meus Projetos\\Solutions\\Calculadora\\dist"
   },
-  "main": "main.js",
+  "main": "server.js",
   "private": true,
   "dependencies": {
     "@angular/common": "^2.4.0",
