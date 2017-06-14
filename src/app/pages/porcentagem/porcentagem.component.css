@@ -1,3 +1,6 @@
 input[type="text"]:disabled {
    color:white !important;
 }
+.whitesmoke{
+    color:whitesmoke !important;
+}

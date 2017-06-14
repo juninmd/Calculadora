@@ -1,0 +1,5 @@
+Ponto de Equilibrio =
+(Gastos Fixos / Margem Média) x 100
+
+Gastos Fixos = Soma todos os itens do relatório dos custos mensais.
+A Margem média é a % do lucro que está na tela porcentagem.
