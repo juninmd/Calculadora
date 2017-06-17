@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-
+declare var Materialize: any;
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -12,4 +12,8 @@ export class HomeComponent implements OnInit {
   ngOnInit() {
   }
 
+  private limpar() {
+    localStorage.clear();
+    Materialize.toast('Os campos armazenados foram limpos!', 4000)
+  }
 }
