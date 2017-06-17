@@ -10,8 +10,10 @@ export class PorcentagemComponent implements OnInit {
 
   constructor(private route: ActivatedRoute) { }
   private despesas: any = '';
+  private somaDespesas: any = '';
   private precoMercadoria: any = '';
   private pv: any = '';
+  private pontoEquilibrio: any = '';
   private markup: any = '';
 
   private principal: any = [];
@@ -24,7 +26,8 @@ export class PorcentagemComponent implements OnInit {
       },
       {
         valor: null,
-        descricao: '% Lucro'
+        descricao: '% Lucro',
+        lucro: true
       },
       {
         valor: this.despesas,
@@ -45,6 +48,9 @@ export class PorcentagemComponent implements OnInit {
     this.route.params.subscribe(params => {
       if (params['despesas'] != null)
         this.despesas = +params["despesas"];
+
+      if (params['somaDespesas'] != null)
+        this.somaDespesas = +params["somaDespesas"];
     });
   }
 
@@ -53,6 +59,13 @@ export class PorcentagemComponent implements OnInit {
     this.markup = (100 - principal) / 100;
 
     this.pv = (this.precoMercadoria / this.markup);
+    this.calcularPontoEquilibrio();
+    return false;
+  }
+
+  private calcularPontoEquilibrio() {
+    let lucro = this.principal.filter(q => q.lucro)[0].valor;
+    this.pontoEquilibrio = (this.somaDespesas * lucro) * 100;
     return false;
   }
 

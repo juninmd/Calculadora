@@ -85,9 +85,8 @@ export class RelatorioComponent {
       outros = this.outros.map(q => q.valor).reduce((sum, current) => sum + current);
 
     let despesas = ((principal + outros) / this.faturamento);
-    console.log("Primeira fórmula:", despesas);
 
-    this.router.navigate(['/porcentagem', { despesas: despesas }]);
+    this.router.navigate(['/porcentagem', { despesas: despesas, somaDespesas: principal + outros }]);
     return false;
   }
 

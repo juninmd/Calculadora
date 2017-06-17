@@ -12,10 +12,18 @@
                     <button type="submit" [disabled]="!porcentagemForm.form.valid" class="btn-floating btn-tiny waves-effect waves-light green"><i class="material-icons">done</i></button>
                     <a (click)="salvar()" title="Salvar" class="btn-floating btn-tiny waves-effect waves-light red"><i class="material-icons">lock</i></a>
                 </div>
-                <div class="collection col s6 destaque">
+                <div class="collection col s3 destaque">
                     <div class="input-field col s12 m12">
                         <input type="number" step="any" required="required" min="0" [(ngModel)]="precoMercadoria" name="precoMercadoria" id="precoMercadoria"
                             class="validate">
+                        <label>Preço Mercadoria</label>
+                    </div>
+                </div>
+                <div class="collection col s3 destaque">
+                    <div class="input-field col s12 m12">
+                        <input type="number" step="any" required="required" min="0" [(ngModel)]="somaDespesas" name="somaDespesas" id="somaDespesas"
+                            class="validate">
+                        <label>Soma Despesas</label>
                         <label class="active">Preco Mercadoria</label>
                     </div>
                 </div>
@@ -31,13 +39,17 @@
         <footer class="page-footer">
             <div class="semicontainer black-text">
                 <div class="row">
-                    <div class="input-field col s6">
+                    <div class="input-field col s4">
                         <input type="text" placeholder="Valor a ser calculado" disabled [(ngModel)]="markup" id="markup" name="markup">
-                        <label class="active">Mark-UP:</label>
+                        <label class="whitesmoke active">Mark-UP:</label>
                     </div>
-                    <div class="input-field col s6">
+                    <div class="input-field col s4">
                         <input type="text" placeholder="Valor a ser calculado" disabled [(ngModel)]="pv" id="pv" name="pv">
-                        <label class="active">PV:</label>
+                        <label class="whitesmoke active">PV:</label>
+                    </div>
+                    <div class="input-field col s4">
+                        <input type="text" placeholder="Valor a ser calculado" disabled [(ngModel)]="pontoEquilibrio" id="pontoEquilibrio" name="pontoEquilibrio">
+                        <label class="whitesmoke active">Ponto de Equilibrio:</label>
                     </div>
                 </div>
             </div>
