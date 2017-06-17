@@ -65,7 +65,7 @@ export class PorcentagemComponent implements OnInit {
 
   private calcularPontoEquilibrio() {
     let lucro = this.principal.filter(q => q.lucro)[0].valor;
-    this.pontoEquilibrio = (this.somaDespesas * lucro) * 100;
+    this.pontoEquilibrio = (this.somaDespesas / lucro);
     return false;
   }
 
@@ -73,7 +73,8 @@ export class PorcentagemComponent implements OnInit {
     let objetoSalvar = {
       despesas: this.despesas,
       precoMercadoria: this.precoMercadoria,
-      principal: this.principal
+      principal: this.principal,
+      somaDespesas: this.somaDespesas
     };
 
     localStorage.setItem("porcentagem", JSON.stringify(objetoSalvar));
@@ -87,5 +88,6 @@ export class PorcentagemComponent implements OnInit {
     this.despesas = objetoSalvar.despesas;
     this.precoMercadoria = objetoSalvar.precoMercadoria;
     this.principal = objetoSalvar.principal;
+    this.somaDespesas = objetoSalvar.somaDespesas;
   }
 }
