@@ -4,19 +4,20 @@
       <div class="row">
         <div class="col s6 m4">
           <h5 class="header">
-          <a routerLink="/" class="btn-floating btn-tiny waves-effect waves-light blue"><i class="material-icons">replay</i></a>
+          <a routerLink="/" class="btn-floating btn-tiny waves-effect waves-light red"><i class="material-icons">replay</i></a>
             Relatório dos custos mensais
           </h5>
         </div>
         <div class="input-field inline col s6 m2">
           <a (click)="adicionar()" class="btn-floating btn-tiny waves-effect waves-light red"><i class="material-icons">add</i></a>
           <button type="submit" [disabled]="!calculadoraForm.form.valid" class="btn-floating btn-tiny waves-effect waves-light green"><i class="material-icons">done</i></button>
+          <a (click)="salvar()" title="Salvar" class="btn-floating btn-tiny waves-effect waves-light red"><i class="material-icons">lock</i></a>
         </div>
         <div class="collection col s6 destaque">
           <div class="input-field inline col s12">
             <input type="number" step="any" required="required" min="0" [(ngModel)]="faturamento" name="faturamento" id="faturamento"
               class="validate">
-            <label>Faturamento Mensal</label>
+            <label class="active">Faturamento Mensal</label>
           </div>
         </div>
       </div>
@@ -25,17 +26,17 @@
         <div class="input-field inline col s6" *ngFor="let item of principal">
           <input type="number" step="any" [value]="item.valor" [(ngModel)]="item.valor" min="0" [id]="item.descricao" [name]="item.descricao"
             required="required" class="validate">
-          <label>{{item.descricao}}</label>
+          <label class="active">{{item.descricao}}</label>
         </div>
 
         <div *ngFor="let item of outros">
           <div>
             <div class="input-field inline col s3">
-              <label>Descrição:</label>
+              <label class="active">Descrição:</label>
               <input type="text" required="required" class="validate">
             </div>
             <div class="input-field col s2">
-              <label>Valor:</label>
+              <label class="active">Valor:</label>
               <input type="number" step="any" required="required" [(ngModel)]="item.valor" min="0" [id]="item.descricao" [name]="item.date"
                 class="validate">
             </div>

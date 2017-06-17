@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+declare var Materialize: any;
 @Component({
   selector: 'app-relatorio',
   templateUrl: './relatorio.component.html',
@@ -7,7 +8,9 @@ import { Router } from '@angular/router';
 })
 export class RelatorioComponent {
 
-  constructor(private router: Router) { }
+  constructor(private router: Router) {
+    this.loadingSave();
+  }
   private outros: any = [];
   private principal: any = [
     {
@@ -48,6 +51,25 @@ export class RelatorioComponent {
 
   private remover(item: any) {
     this.outros.splice(this.outros.indexOf(item), 1);
+  }
+
+  private salvar() {
+    let objetoSalvar = {
+      faturamento: this.faturamento,
+      principal: this.principal,
+      outros: this.outros
+    };
+    localStorage.setItem("relatorio", JSON.stringify(objetoSalvar));
+    Materialize.toast('Os campos foram salvos, na próxima vez que abrir a página eles vão estar carregados!', 4000)
+  }
+
+  private loadingSave() {
+    if (localStorage.getItem("relatorio") == null)
+      return;
+    let objetoSalvar = JSON.parse(localStorage.getItem("relatorio"));
+    this.faturamento = objetoSalvar.faturamento;
+    this.principal = objetoSalvar.principal;
+    this.outros = objetoSalvar.outros;
   }
 
   /**
