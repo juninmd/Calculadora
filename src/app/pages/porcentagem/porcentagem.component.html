@@ -4,18 +4,19 @@
             <div class="row">
                 <div class="col s4 m4">
                     <h5 class="header">
-                    <a routerLink="/" class="btn-floating btn-tiny waves-effect waves-light blue"><i class="material-icons">replay</i></a>                    Porcentagem
+                        <a routerLink="/" class="btn-floating btn-tiny waves-effect waves-light red"><i class="material-icons">replay</i></a>                        Porcentagem
                     </h5>
                     <small>ex: 0,2</small>
                 </div>
                 <div class="input-field col s2 m2">
                     <button type="submit" [disabled]="!porcentagemForm.form.valid" class="btn-floating btn-tiny waves-effect waves-light green"><i class="material-icons">done</i></button>
+                    <a (click)="salvar()" title="Salvar" class="btn-floating btn-tiny waves-effect waves-light red"><i class="material-icons">lock</i></a>
                 </div>
                 <div class="collection col s6 destaque">
                     <div class="input-field col s12 m12">
                         <input type="number" step="any" required="required" min="0" [(ngModel)]="precoMercadoria" name="precoMercadoria" id="precoMercadoria"
                             class="validate">
-                        <label>Preco Mercadoria</label>
+                        <label class="active">Preco Mercadoria</label>
                     </div>
                 </div>
 

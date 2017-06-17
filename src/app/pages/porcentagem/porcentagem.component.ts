@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+declare var Materialize: any;
 @Component({
   selector: 'app-porcentagem',
   templateUrl: './porcentagem.component.html',
@@ -16,11 +17,6 @@ export class PorcentagemComponent implements OnInit {
   private principal: any = [];
 
   ngOnInit() {
-    this.route.params.subscribe(params => {
-      if (params['despesas'] != null)
-        this.despesas = +params["despesas"];
-    });
-
     this.principal = [
       {
         valor: null,
@@ -44,15 +40,39 @@ export class PorcentagemComponent implements OnInit {
         descricao: '% Frete'
       },
     ];
+    this.loadingSave();
+
+    this.route.params.subscribe(params => {
+      if (params['despesas'] != null)
+        this.despesas = +params["despesas"];
+    });
   }
 
   private calcularMarkup() {
     let principal = this.principal.map(q => q.valor).reduce((sum, current) => sum + current);
     this.markup = (100 - principal) / 100;
-    console.log("Markup", this.markup);
 
     this.pv = (this.precoMercadoria / this.markup);
-    console.log("PV", this.pv);
     return false;
+  }
+
+  private salvar() {
+    let objetoSalvar = {
+      despesas: this.despesas,
+      precoMercadoria: this.precoMercadoria,
+      principal: this.principal
+    };
+
+    localStorage.setItem("porcentagem", JSON.stringify(objetoSalvar));
+    Materialize.toast('Os campos foram salvos, na próxima vez que abrir a página eles vão estar carregados!', 4000)
+  }
+
+  private loadingSave() {
+    if (localStorage.getItem("porcentagem") == null)
+      return;
+    let objetoSalvar = JSON.parse(localStorage.getItem("porcentagem"));
+    this.despesas = objetoSalvar.despesas;
+    this.precoMercadoria = objetoSalvar.precoMercadoria;
+    this.principal = objetoSalvar.principal;
   }
 }
