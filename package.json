@@ -5,7 +5,8 @@
   "scripts": {
     "start": "ng server",
     "build": "ng build --base-href $npm_package_config_baseurl",
-    "electron": "electron ."
+    "electron": "electron .",
+    "package": "electron-packager ./dist Calculadora --platform=win32 --out ./build --overwrite"
   },
   "config": {
     "baseurl": "D:\\Meus Projetos\\Solutions\\Calculadora\\dist"
@@ -38,7 +39,9 @@
     "@types/node": "~6.0.60",
     "codelyzer": "~2.0.0",
     "electron": "^1.6.2",
+    "electron-packager": "^8.5.2",
     "electron-reload": "^1.1.0",
+    "electron-winstaller": "^2.5.2",
     "jasmine-core": "~2.5.2",
     "jasmine-spec-reporter": "~3.2.0",
     "karma": "~1.4.1",
