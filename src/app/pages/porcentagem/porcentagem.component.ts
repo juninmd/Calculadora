@@ -65,7 +65,7 @@ export class PorcentagemComponent implements OnInit {
 
   private calcularPontoEquilibrio() {
     let lucro = this.principal.filter(q => q.lucro)[0].valor;
-    this.pontoEquilibrio = (this.somaDespesas / lucro);
+    this.pontoEquilibrio = (this.somaDespesas / (lucro * 100)) * 100;
     return false;
   }
 
