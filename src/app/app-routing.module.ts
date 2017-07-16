@@ -5,6 +5,7 @@ import { PorcentagemComponent } from './pages/porcentagem/porcentagem.component'
 import { RelatorioComponent } from './pages/relatorio/relatorio.component';
 import { SuporteComponent } from './pages/suporte/suporte.component';
 import { HomeComponent } from './pages/home/home.component';
+import { MensalComponent } from './pages/mensal/mensal.component';
 
 @NgModule({
     imports: [
@@ -13,6 +14,7 @@ import { HomeComponent } from './pages/home/home.component';
             { path: 'relatorio', component: RelatorioComponent },
             { path: 'suporte', component: SuporteComponent },
             { path: 'home', component: HomeComponent },
+            { path: 'mensal', component: MensalComponent },
             { path: '', component: HomeComponent },
             { path: '**', redirectTo: 'home' }
         ])

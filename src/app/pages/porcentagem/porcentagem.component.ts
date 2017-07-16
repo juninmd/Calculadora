@@ -9,8 +9,8 @@ declare var Materialize: any;
 export class PorcentagemComponent implements OnInit {
 
   constructor(private route: ActivatedRoute) { }
-  private despesas: any = '';
-  private somaDespesas: any = '';
+  private despesas: any = null;
+  private somaDespesas: any = null;
   private precoMercadoria: any = '';
   private pv: any = '';
   private pontoEquilibrio: any = '';
@@ -19,39 +19,41 @@ export class PorcentagemComponent implements OnInit {
   private principal: any = [];
 
   ngOnInit() {
-    this.principal = [
-      {
-        valor: null,
-        descricao: '% Simples'
-      },
-      {
-        valor: null,
-        descricao: '% Lucro',
-        lucro: true
-      },
-      {
-        valor: this.despesas,
-        descricao: '% Despesas',
-        activate: true
-      },
-      {
-        valor: null,
-        descricao: '% Comissão'
-      },
-      {
-        valor: null,
-        descricao: '% Frete'
-      },
-    ];
-    this.loadingSave();
-
     this.route.params.subscribe(params => {
       if (params['despesas'] != null)
         this.despesas = +params["despesas"];
 
       if (params['somaDespesas'] != null)
         this.somaDespesas = +params["somaDespesas"];
+
+      this.principal = [
+        {
+          valor: null,
+          descricao: '% Simples'
+        },
+        {
+          valor: null,
+          descricao: '% Lucro',
+          lucro: true
+        },
+        {
+          valor: this.despesas,
+          descricao: '% Despesas',
+          activate: true
+        },
+        {
+          valor: null,
+          descricao: '% Comissão'
+        },
+        {
+          valor: null,
+          descricao: '% Frete'
+        },
+      ];
+      this.loadingSave();
+
     });
+
   }
 
   private calcularMarkup() {
@@ -85,9 +87,39 @@ export class PorcentagemComponent implements OnInit {
     if (localStorage.getItem("porcentagem") == null)
       return;
     let objetoSalvar = JSON.parse(localStorage.getItem("porcentagem"));
-    this.despesas = objetoSalvar.despesas;
+
+    this.principal = this.principal.map(q => {
+      if (this.despesas != null && q.activate) {
+        Materialize.toast('A porcentagem de despesa foi sobrescrita pelo cálculo atual!', 4000)
+        return q;
+      }
+
+      let index = objetoSalvar.principal.map(q => q.descricao).indexOf(q.descricao);
+      q = objetoSalvar.principal[index];
+      return q;
+    });
+
+    if (this.despesas == null)
+      this.despesas = objetoSalvar.despesas;
+
+    if (this.somaDespesas == null)
+      this.somaDespesas = objetoSalvar.somaDespesas;
+
     this.precoMercadoria = objetoSalvar.precoMercadoria;
-    this.principal = objetoSalvar.principal;
-    this.somaDespesas = objetoSalvar.somaDespesas;
+
+  }
+
+  private salvarMesAtual() {
+    let data = new Date();
+    let objetoSalvar = {
+      mes: `${data.getFullYear()}/${data.getMonth() + 1}`,
+      despesas: this.despesas,
+      precoMercadoria: this.precoMercadoria,
+      principal: this.principal,
+      somaDespesas: this.somaDespesas,
+      date: data
+    };
+
+    localStorage.setItem("meses", JSON.stringify(objetoSalvar));
   }
 }

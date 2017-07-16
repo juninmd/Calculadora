@@ -14,12 +14,7 @@
     padding: 13px;
 }
 
-
-.header {
-    color: #ee6e73;
-    font-weight: 300;
-}
-
+ 
 body{
     background-color: rgba(23, 23, 23, 0.89);
 }
@@ -49,4 +44,25 @@ body{
   direction: ltr;
   -moz-font-feature-settings: 'liga';
   -moz-osx-font-smoothing: grayscale;
+}
+ 
+footer.page-footer {
+    padding-top: 20px;
+    background-color: #000000;
+    border-radius: 24px;
+}
+.title{
+        color: #dddddd;
+}
+
+.input-field label{
+    color: #000000;
+}
+.input-field label.active
+{
+    font-size: 1.0rem
+}
+.no-space{
+    margin: 0;
+    padding: 0;
 }

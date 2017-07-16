@@ -1,25 +1,22 @@
-<div class="card white darken-1">
-    <div class="card-content black-text">
-        <form class="col s12" #porcentagemForm="ngForm" (ngSubmit)="calcularMarkup()">
+<form class="col s12" #porcentagemForm="ngForm" (ngSubmit)="calcularMarkup()">
+    <div class="card white darken-1">
+        <div class="card-content black-text">
+
             <div class="row">
-                <div class="col s4 m4">
+                <div class="col s12 m6 l6">
                     <h5 class="header">
-                        <a routerLink="/" class="btn-floating btn-tiny waves-effect waves-light red"><i class="material-icons">replay</i></a>                        Porcentagem
+                        Porcentagem
                     </h5>
                     <span class="new badge red" data-badge-caption="%">Exemplo de porcentagem: 0,2</span>
                 </div>
-                <div class="input-field col s2 m2">
-                    <button type="submit" [disabled]="!porcentagemForm.form.valid" class="btn-floating btn-tiny waves-effect waves-light green"><i class="material-icons">done</i></button>
-                    <a (click)="salvar()" title="Salvar" class="btn-floating btn-tiny waves-effect waves-light red"><i class="material-icons">cloud</i></a>
-                </div>
-                <div class="collection col s3 destaque">
+                <div class="collection col s12 m12 l3 destaque">
                     <div class="input-field col s12 m12">
                         <input type="number" step="any" required="required" min="0" [(ngModel)]="precoMercadoria" name="precoMercadoria" id="precoMercadoria"
                             class="validate">
                         <label class="active">Preço Mercadoria R$</label>
                     </div>
                 </div>
-                <div class="collection col s3 destaque">
+                <div class="collection col s12 m12 l3 destaque">
                     <div class="input-field col s12 m12">
                         <input type="number" step="any" required="required" min="0" [(ngModel)]="somaDespesas" name="somaDespesas" id="somaDespesas"
                             class="validate">
@@ -27,31 +24,42 @@
                     </div>
                 </div>
 
-                <div class="input-field col s6" *ngFor="let item of principal">
+                <div class="input-field col s12 m6 l6" *ngFor="let item of principal">
                     <input type="number" step="any" [value]="item.valor" [(ngModel)]="item.valor" min="0" [id]="item.descricao" [name]="item.descricao"
                         required="required" class="validate">
                     <label class="active">{{item.descricao}}</label>
                 </div>
 
             </div>
-        </form>
-        <footer class="page-footer">
-            <div class="semicontainer black-text">
-                <div class="row">
-                    <div class="input-field col s4">
-                        <input type="text" placeholder="Valor a ser calculado" disabled [(ngModel)]="markup" id="markup" name="markup">
-                        <label class="whitesmoke active">Mark-UP:</label>
-                    </div>
-                    <div class="input-field col s4">
-                        <input type="text" placeholder="Valor a ser calculado" disabled [(ngModel)]="pv" id="pv" name="pv">
-                        <label class="whitesmoke active">PV:</label>
-                    </div>
-                    <div class="input-field col s4">
-                        <input type="text" placeholder="Valor a ser calculado" disabled [(ngModel)]="pontoEquilibrio" id="pontoEquilibrio" name="pontoEquilibrio">
-                        <label class="whitesmoke active">Ponto de Equilibrio:</label>
+            <footer class="page-footer">
+                <div class="semicontainer black-text">
+                    <div class="row">
+                        <div class="input-field col s12 m4 l4">
+                            <input type="text" placeholder="Valor a ser calculado" disabled [(ngModel)]="markup" id="markup" name="markup">
+                            <label class="whitesmoke active">Mark-UP:</label>
+                        </div>
+                        <div class="input-field col s12 m4 l4">
+                            <input type="text" placeholder="Valor a ser calculado" disabled [(ngModel)]="pv" id="pv" name="pv">
+                            <label class="whitesmoke active">PV:</label>
+                        </div>
+                        <div class="input-field col s12 m4 l4">
+                            <input type="text" placeholder="Valor a ser calculado" disabled [(ngModel)]="pontoEquilibrio" id="pontoEquilibrio" name="pontoEquilibrio">
+                            <label class="whitesmoke active">Ponto de Equilibrio:</label>
+                        </div>
                     </div>
                 </div>
+            </footer>
+        </div>
+        <div class="card-action">
+            <div class="row">
+                <div class="input-field col inline right">
+                    <button type="button" (click)="salvar()" [disabled]="!porcentagemForm.form.valid" title="Salvar formulário" class="btn-floating btn-tiny waves-effect waves-light blue"><i class="material-icons">cloud</i></button>
+                    <button type="submit" [disabled]="!porcentagemForm.form.valid" class="btn-floating btn-tiny waves-effect waves-light blue"><i class="material-icons">done</i></button>
+                </div>
+                <div class="input-field col s3 inline left">
+                    <a routerLink="/" class="btn btn-tiny waves-effect waves-light red"> Voltar</a>
+                </div>
             </div>
-        </footer>
+        </div>
     </div>
-</div>
+</form>

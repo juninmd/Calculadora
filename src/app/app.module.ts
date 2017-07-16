@@ -11,6 +11,7 @@ import { PorcentagemComponent } from './pages/porcentagem/porcentagem.component'
 import { RelatorioComponent } from './pages/relatorio/relatorio.component';
 import { SuporteComponent } from './pages/suporte/suporte.component';
 import { HomeComponent } from './pages/home/home.component';
+import { MensalComponent } from './pages/mensal/mensal.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { HomeComponent } from './pages/home/home.component';
     PorcentagemComponent,
     RelatorioComponent,
     SuporteComponent,
-    HomeComponent
+    HomeComponent,
+    MensalComponent
   ],
   imports: [
     MaterializeModule,
