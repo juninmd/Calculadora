@@ -8,9 +8,6 @@ declare var Materialize: any;
 })
 export class RelatorioComponent {
 
-  constructor(private router: Router) {
-    this.loadingSave();
-  }
   private outros: any = [];
   private principal: any = [
     {
@@ -38,7 +35,13 @@ export class RelatorioComponent {
       descricao: 'Descartáveis'
     },
   ];
+  exibeMensagemCarregado : boolean = false;
 
+  constructor(private router: Router) {
+    sessionStorage.clear();
+    this.loadingSave();
+    this.exibeMensagemCarregado = localStorage.getItem("relatorio") != null;
+  }
   private faturamento: any = null;
 
   private adicionar() {
@@ -86,8 +89,23 @@ export class RelatorioComponent {
 
     let despesas = ((principal + outros) / this.faturamento);
 
+    this.armazenarSession();
     this.router.navigate(['/porcentagem', { despesas: despesas, somaDespesas: principal + outros }]);
+
     return false;
+  }
+
+  /**
+   * Armazenamos os itens em session para lermos na próxima tela
+   */
+  armazenarSession() {
+    let objetoSalvar = {
+      despesas: this.principal,
+      outrasDespesas: this.outros,
+      faturamento: this.faturamento
+    }
+
+    sessionStorage.setItem('tempRelatorio', JSON.stringify(objetoSalvar));
   }
 
 }

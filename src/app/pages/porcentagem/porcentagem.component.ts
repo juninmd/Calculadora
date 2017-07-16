@@ -9,16 +9,22 @@ declare var Materialize: any;
 export class PorcentagemComponent implements OnInit {
 
   constructor(private route: ActivatedRoute) { }
-  private despesas: any = null;
-  private somaDespesas: any = null;
-  private precoMercadoria: any = '';
-  private pv: any = '';
-  private pontoEquilibrio: any = '';
-  private markup: any = '';
-
-  private principal: any = [];
+  despesas: any = null;
+  somaDespesas: any = null;
+  precoMercadoria: any = '';
+  pv: any = '';
+  pontoEquilibrio: any = '';
+  markup: any = '';
+  mesAtual: any = null;
+  principal: any = [];
+  exibeMensagemCarregado: boolean = false;
 
   ngOnInit() {
+    this.exibeMensagemCarregado = localStorage.getItem("porcentagem") != null;
+
+    let date = new Date();
+    this.mesAtual = `${date.getFullYear()}/${date.getMonth() + 1}`;
+
     this.route.params.subscribe(params => {
       if (params['despesas'] != null)
         this.despesas = +params["despesas"];
@@ -109,17 +115,55 @@ export class PorcentagemComponent implements OnInit {
 
   }
 
-  private salvarMesAtual() {
+  salvarMesAtual() {
+    let tempRelatorio = sessionStorage.getItem("tempRelatorio");
+    if (tempRelatorio == null) {
+      Materialize.toast('Para registrar esse mês, você deve primeiro calcular os itens pela tela de relatório!', 5000)
+      return;
+    }
+
+    if (this.pv == '') {
+      Materialize.toast('Por favor, calcule o formulário', 5000)
+      return;
+    }
+
+    let serializado = JSON.parse(sessionStorage.getItem("tempRelatorio"))
+
     let data = new Date();
     let objetoSalvar = {
       mes: `${data.getFullYear()}/${data.getMonth() + 1}`,
-      despesas: this.despesas,
+      porcDespesas: this.despesas,
       precoMercadoria: this.precoMercadoria,
-      principal: this.principal,
+      porcentagens: this.principal,
       somaDespesas: this.somaDespesas,
-      date: data
+      date: data,
+      despesas: serializado.despesas,
+      outrasDespesas: serializado.outrasDespesas,
+      faturamento: serializado.faturamento,
+      markup: this.markup,
+      pv: this.pv,
+      pontoEquilibrio: this.pontoEquilibrio
     };
 
-    localStorage.setItem("meses", JSON.stringify(objetoSalvar));
+    this.logicaMeses(objetoSalvar);
   }
+
+  private logicaMeses(mes: any) {
+    let storageMeses = localStorage.getItem("meses");
+    let meses = [];
+    if (storageMeses != null) {
+      meses = JSON.parse(storageMeses);
+    }
+
+    if (meses.filter(q => { return q.mes == mes.mes }).length > 0) {
+      Materialize.toast('Esse mês já foi registrado!', 5000)
+      return;
+    }
+
+    meses.push(mes);
+
+    localStorage.setItem('meses', JSON.stringify(meses));
+    Materialize.toast('Esse mês foi registrado com sucesso!', 5000)
+  }
+
 }

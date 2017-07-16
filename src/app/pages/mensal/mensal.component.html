@@ -1,57 +1,89 @@
 <div class="card white darken-1">
     <div class="card-content black-text">
-        <form class="col s12" #porcentagemForm="ngForm" (ngSubmit)="calcularMarkup()">
-            <div class="row">
-                <div class="col s4 m4">
-                    <h5 class="header">
-                        <a routerLink="/" class="btn-floating btn-tiny waves-effect waves-light red"><i class="material-icons">replay</i></a>                        Porcentagem
-                    </h5>
-                    <span class="new badge red" data-badge-caption="%">Exemplo de porcentagem: 0,2</span>
-                </div>
-                <div class="input-field col s2 m2">
-                    <button type="submit" [disabled]="!porcentagemForm.form.valid" class="btn-floating btn-tiny waves-effect waves-light green"><i class="material-icons">done</i></button>
-                    <a (click)="salvar()" title="Salvar" class="btn-floating btn-tiny waves-effect waves-light red"><i class="material-icons">cloud</i></a>
-                </div>
-                <div class="collection col s3 destaque">
-                    <div class="input-field col s12 m12">
-                        <input type="number" step="any" required="required" min="0" [(ngModel)]="precoMercadoria" name="precoMercadoria" id="precoMercadoria"
-                            class="validate">
-                        <label class="active">Preço Mercadoria R$</label>
-                    </div>
-                </div>
-                <div class="collection col s3 destaque">
-                    <div class="input-field col s12 m12">
-                        <input type="number" step="any" required="required" min="0" [(ngModel)]="somaDespesas" name="somaDespesas" id="somaDespesas"
-                            class="validate">
-                        <label class="active">Soma Despesas R$</label>
-                    </div>
-                </div>
-
-                <div class="input-field col s6" *ngFor="let item of principal">
-                    <input type="number" step="any" [value]="item.valor" [(ngModel)]="item.valor" min="0" [id]="item.descricao" [name]="item.descricao"
-                        required="required" class="validate">
-                    <label class="active">{{item.descricao}}</label>
-                </div>
-
-            </div>
-        </form>
-        <footer class="page-footer">
-            <div class="semicontainer black-text">
-                <div class="row">
-                    <div class="input-field col s4">
-                        <input type="text" placeholder="Valor a ser calculado" disabled [(ngModel)]="markup" id="markup" name="markup">
-                        <label class="whitesmoke active">Mark-UP:</label>
-                    </div>
-                    <div class="input-field col s4">
-                        <input type="text" placeholder="Valor a ser calculado" disabled [(ngModel)]="pv" id="pv" name="pv">
-                        <label class="whitesmoke active">PV:</label>
-                    </div>
-                    <div class="input-field col s4">
-                        <input type="text" placeholder="Valor a ser calculado" disabled [(ngModel)]="pontoEquilibrio" id="pontoEquilibrio" name="pontoEquilibrio">
-                        <label class="whitesmoke active">Ponto de Equilibrio:</label>
-                    </div>
+        <div class="row">
+            <h5 class="header">
+                Despesas por meses
+            </h5>
+        </div>
+        <div class="row">
+            <div class="card col s12 m3 l3" (click)="openModal(item)" *ngFor="let item of meses">
+                <div class="card-content">
+                    <span class="big">{{item.mes}}</span>
                 </div>
             </div>
-        </footer>
+        </div>
+
+    </div>
+</div>
+
+
+<!-- Modal Structure -->
+<div id="modal1" class="modal" materialize="modal" [materializeParams]="[{dismissible: false}]" [materializeActions]="modalActions">
+    <div class="modal-content">
+        <h4 class="header">Despesas - {{mes.mes}}</h4>
+
+        <div class="row">
+
+            <div class="card col s3 m3 l3 white-text" *ngFor="let x of mes.despesas">
+                <div class="card-content">
+                    <span>{{x.descricao}}<br>{{x.valor}}</span>
+                </div>
+            </div>
+
+            <div class="card col s3 m3 l3 white-text" *ngFor="let x of mes.outrasDespesas">
+                <div class="card-content">
+                    <span>{{x.descricao}}<br>{{x.valor}}</span>
+                </div>
+            </div>
+        </div>
+
+        <h4 class="header">Porcentagens</h4>
+        <div class="row">
+            <div class="card col s3 m3 l3 white-text" *ngFor="let x of mes.porcentagens">
+                <div class="card-content">
+                    <span>{{x.descricao}}<br>{{x.valor}}</span>
+                </div>
+            </div>
+        </div>
+
+        <h4 class="header">Outros Itens</h4>
+
+        <div class="row">
+            <div class="card col s3 m3 l3 white-text">
+                <div class="card-content">
+                    <span>Preço Mercadoria<br>{{mes.precoMercadoria}}</span>
+                </div>
+            </div>
+
+            <div class="card col s3 m3 l3 white-text">
+                <div class="card-content">
+                    <span>Faturamento<br>{{mes.faturamento}}</span>
+                </div>
+            </div>
+
+            <div class="card col s3 m3 l3 white-text">
+                <div class="card-content">
+                    <span>PV<br>{{mes.pv}}</span>
+                </div>
+            </div>
+
+            <div class="card col s3 m3 l3 white-text">
+                <div class="card-content">
+                    <span>Markup<br>{{mes.markup}}</span>
+                </div>
+            </div>
+
+            <div class="card col s3 m3 l3 white-text">
+                <div class="card-content">
+                    <span>Ponto Equilibrio<br>{{mes.pontoEquilibrio}}</span>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="modal-footer">
+        <a (click)="closeModal()" class="btn btn-tiny waves-effect waves-light red left"> Voltar</a>
+        <a class="modal-action modal-close waves-effect waves-green btn-flat">Sair</a>
     </div>
 </div>

@@ -1,0 +1,10 @@
+.card{
+        background: rebeccapurple;
+}
+    .card-content{
+            text-align: center;
+                color: white;
+}
+    .card-content span.big{
+            font-size: 25px;
+    }
