@@ -4,3 +4,7 @@ input[type="text"]:disabled {
 .whitesmoke{
     color:whitesmoke !important;
 }
+
+.paddingBase {
+    padding: 10px;
+}

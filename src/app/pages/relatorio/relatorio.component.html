@@ -10,7 +10,7 @@
           </h5>
         </div>
 
-        <div class="collection col s12 m6 l6 destaque right">
+        <div class="col s12 m6 l6 right">
           <div class="input-field inline col s12">
             <input type="number" step="any" required="required" min="0" [(ngModel)]="faturamento" name="faturamento" id="faturamento"
               class="validate">
@@ -30,7 +30,7 @@
           <div>
             <div class="input-field inline col s12 m3 l3">
               <label class="active">Descrição:</label>
-              <input type="text" required="required" class="validate">
+              <input type="text" required="required" class="validate" [(ngModel)]="item.descricao" id="{{item.descricao}}+'desc'" name="{{item.date}}+'desc'">
             </div>
             <div class="input-field col s9 m2 l2">
               <label class="active">Valor:</label>

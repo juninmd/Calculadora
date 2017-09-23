@@ -31,4 +31,8 @@ export class MensalComponent implements OnInit {
     this.modalActions.emit({ action: "modal", params: ['close'] });
   }
 
+  limpar() {
+    this.meses = [];
+    localStorage.removeItem('meses');
+  }
 }

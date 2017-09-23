@@ -5,9 +5,7 @@
                 Despesas por meses
             </h5>
         </div>
-        <pre>
-            {{meses}}
-        </pre>
+ 
         <div class="row" *ngIf="meses == 0">
             <div class="card col s12 white-text">
                 <div class="card-content">
@@ -29,6 +27,7 @@
         <div class="row">
             <div class="input-field col s6 inline left">
                 <a routerLink="/" class="btn btn-tiny waves-effect waves-light red"> Voltar</a>
+                <a (click)="limpar()" class="btn btn-tiny waves-effect waves-light blue"> Limpar</a>
             </div>
         </div>
     </div>
@@ -80,7 +79,7 @@
 
             <div class="card col s3 m3 l3 white-text">
                 <div class="card-content">
-                    <span>PV<br>{{mes.pv}}</span>
+                    <span>Preço de Venda<br>{{mes.pv}}</span>
                 </div>
             </div>
 
@@ -100,7 +99,6 @@
     </div>
 
     <div class="modal-footer">
-        <a (click)="closeModal()" class="btn btn-tiny waves-effect waves-light red left"> Voltar</a>
         <a class="modal-action modal-close waves-effect waves-green btn-flat">Sair</a>
     </div>
 </div>
