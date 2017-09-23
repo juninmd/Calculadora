@@ -14,7 +14,7 @@ export class HomeComponent implements OnInit {
 
   limpar() {
     localStorage.removeItem('porcentagem');
-    localStorage.removeItem('relatorio');
+    localStorage.removeItem('custo');
     sessionStorage.removeItem('tempRelatorio');
     Materialize.toast('Os campos armazenados foram limpos!', 4000)
   }
