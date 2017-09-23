@@ -62,7 +62,7 @@ export class CustoComponent implements OnInit {
 
   }
 
-  private calcularMarkup() {
+  calcularMarkup() {
     let principal = this.principal.map(q => q.valor).reduce((sum, current) => sum + current);
     this.markup = (100 - principal) / 100;
 
@@ -71,13 +71,13 @@ export class CustoComponent implements OnInit {
     return false;
   }
 
-  private calcularPontoEquilibrio() {
+  calcularPontoEquilibrio() {
     let lucro = this.principal.filter(q => q.lucro)[0].valor;
     this.pontoEquilibrio = (this.somaDespesas / (lucro * 100)) * 100;
     return false;
   }
 
-  private salvar() {
+  salvar() {
     let objetoSalvar = {
       despesas: this.despesas,
       custoMercadoria: this.custoMercadoria,
@@ -89,7 +89,7 @@ export class CustoComponent implements OnInit {
     Materialize.toast('Os campos foram salvos, na próxima vez que abrir a página eles vão estar carregados!', 4000)
   }
 
-  private loadingSave() {
+  loadingSave() {
     if (localStorage.getItem("custo") == null)
       return;
     let objetoSalvar = JSON.parse(localStorage.getItem("custo"));
@@ -148,7 +148,7 @@ export class CustoComponent implements OnInit {
     this.logicaMeses(objetoSalvar);
   }
 
-  private logicaMeses(mes: any) {
+  logicaMeses(mes: any) {
     let storageMeses = localStorage.getItem("meses");
     let meses = [];
     if (storageMeses != null) {

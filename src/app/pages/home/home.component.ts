@@ -12,7 +12,7 @@ export class HomeComponent implements OnInit {
   ngOnInit() {
   }
 
-  private limpar() {
+  limpar() {
     localStorage.removeItem('porcentagem');
     localStorage.removeItem('relatorio');
     sessionStorage.removeItem('tempRelatorio');

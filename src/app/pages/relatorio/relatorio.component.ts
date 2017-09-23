@@ -7,9 +7,14 @@ declare var Materialize: any;
   styleUrls: ['./relatorio.component.css']
 })
 export class RelatorioComponent {
+  constructor(private router: Router) {
+    sessionStorage.clear();
+    this.loadingSave();
+    this.exibeMensagemCarregado = localStorage.getItem("relatorio") != null;
+  }
 
-  private outros: any = [];
-  private principal: any = [
+  outros: any = [];
+  principal: any = [
     {
       valor: null,
       descricao: 'Água'
@@ -35,16 +40,11 @@ export class RelatorioComponent {
       descricao: 'Descartáveis'
     },
   ];
-  exibeMensagemCarregado : boolean = false;
+  exibeMensagemCarregado: boolean = false;
 
-  constructor(private router: Router) {
-    sessionStorage.clear();
-    this.loadingSave();
-    this.exibeMensagemCarregado = localStorage.getItem("relatorio") != null;
-  }
-  private faturamento: any = null;
+  faturamento: any = null;
 
-  private adicionar() {
+  adicionar() {
     this.outros.push({
       valor: '',
       descricao: '',
@@ -52,11 +52,11 @@ export class RelatorioComponent {
     });
   }
 
-  private remover(item: any) {
+  remover(item: any) {
     this.outros.splice(this.outros.indexOf(item), 1);
   }
 
-  private salvar() {
+  salvar() {
     let objetoSalvar = {
       faturamento: this.faturamento,
       principal: this.principal,
@@ -66,7 +66,7 @@ export class RelatorioComponent {
     Materialize.toast('Os campos foram salvos, na próxima vez que abrir a página eles vão estar carregados!', 4000)
   }
 
-  private loadingSave() {
+  loadingSave() {
     if (localStorage.getItem("relatorio") == null)
       return;
     let objetoSalvar = JSON.parse(localStorage.getItem("relatorio"));
