@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { PorcentagemComponent } from './porcentagem.component';
+import { CustoComponent } from './custo.component';
 
-describe('PorcentagemComponent', () => {
-  let component: PorcentagemComponent;
-  let fixture: ComponentFixture<PorcentagemComponent>;
+describe('CustoComponent', () => {
+  let component: CustoComponent;
+  let fixture: ComponentFixture<CustoComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ PorcentagemComponent ]
+      declarations: [ CustoComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(PorcentagemComponent);
+    fixture = TestBed.createComponent(CustoComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -2,16 +2,16 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 declare var Materialize: any;
 @Component({
-  selector: 'app-porcentagem',
-  templateUrl: './porcentagem.component.html',
-  styleUrls: ['./porcentagem.component.css']
+  selector: 'app-custo',
+  templateUrl: './custo.component.html',
+  styleUrls: ['./custo.component.css']
 })
-export class PorcentagemComponent implements OnInit {
+export class CustoComponent implements OnInit {
 
   constructor(private route: ActivatedRoute) { }
   despesas: any = null;
   somaDespesas: any = null;
-  precoMercadoria: any = '';
+  custoMercadoria: any = '';
   pv: any = '';
   pontoEquilibrio: any = '';
   markup: any = '';
@@ -20,7 +20,7 @@ export class PorcentagemComponent implements OnInit {
   exibeMensagemCarregado: boolean = false;
 
   ngOnInit() {
-    this.exibeMensagemCarregado = localStorage.getItem("porcentagem") != null;
+    this.exibeMensagemCarregado = localStorage.getItem("custo") != null;
 
     let date = new Date();
     this.mesAtual = `${date.getFullYear()}/${date.getMonth() + 1}`;
@@ -66,7 +66,7 @@ export class PorcentagemComponent implements OnInit {
     let principal = this.principal.map(q => q.valor).reduce((sum, current) => sum + current);
     this.markup = (100 - principal) / 100;
 
-    this.pv = (this.precoMercadoria / this.markup);
+    this.pv = (this.custoMercadoria / this.markup);
     this.calcularPontoEquilibrio();
     return false;
   }
@@ -80,19 +80,19 @@ export class PorcentagemComponent implements OnInit {
   private salvar() {
     let objetoSalvar = {
       despesas: this.despesas,
-      precoMercadoria: this.precoMercadoria,
+      custoMercadoria: this.custoMercadoria,
       principal: this.principal,
       somaDespesas: this.somaDespesas
     };
 
-    localStorage.setItem("porcentagem", JSON.stringify(objetoSalvar));
+    localStorage.setItem("custo", JSON.stringify(objetoSalvar));
     Materialize.toast('Os campos foram salvos, na próxima vez que abrir a página eles vão estar carregados!', 4000)
   }
 
   private loadingSave() {
-    if (localStorage.getItem("porcentagem") == null)
+    if (localStorage.getItem("custo") == null)
       return;
-    let objetoSalvar = JSON.parse(localStorage.getItem("porcentagem"));
+    let objetoSalvar = JSON.parse(localStorage.getItem("custo"));
 
     this.principal = this.principal.map(q => {
       if (this.despesas != null && q.activate) {
@@ -111,7 +111,7 @@ export class PorcentagemComponent implements OnInit {
     if (this.somaDespesas == null)
       this.somaDespesas = objetoSalvar.somaDespesas;
 
-    this.precoMercadoria = objetoSalvar.precoMercadoria;
+    this.custoMercadoria = objetoSalvar.custoMercadoria;
 
   }
 
@@ -133,7 +133,7 @@ export class PorcentagemComponent implements OnInit {
     let objetoSalvar = {
       mes: `${data.getFullYear()}/${data.getMonth() + 1}`,
       porcDespesas: this.despesas,
-      precoMercadoria: this.precoMercadoria,
+      custoMercadoria: this.custoMercadoria,
       porcentagens: this.principal,
       somaDespesas: this.somaDespesas,
       date: data,

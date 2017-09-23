@@ -5,6 +5,17 @@
                 Despesas por meses
             </h5>
         </div>
+        <pre>
+            {{meses}}
+        </pre>
+        <div class="row" *ngIf="meses == 0">
+            <div class="card col s12 white-text">
+                <div class="card-content">
+                    <span>Você ainda não salvou suas despesas</span>
+                </div>
+            </div>
+        </div>
+
         <div class="row">
             <div class="card col s12 m3 l3" (click)="openModal(item)" *ngFor="let item of meses">
                 <div class="card-content">
@@ -12,7 +23,14 @@
                 </div>
             </div>
         </div>
+    </div>
 
+    <div class="card-action">
+        <div class="row">
+            <div class="input-field col s6 inline left">
+                <a routerLink="/" class="btn btn-tiny waves-effect waves-light red"> Voltar</a>
+            </div>
+        </div>
     </div>
 </div>
 
@@ -23,7 +41,6 @@
         <h4 class="header">Despesas - {{mes.mes}}</h4>
 
         <div class="row">
-
             <div class="card col s3 m3 l3 white-text" *ngFor="let x of mes.despesas">
                 <div class="card-content">
                     <span>{{x.descricao}}<br>{{x.valor}}</span>
@@ -51,7 +68,7 @@
         <div class="row">
             <div class="card col s3 m3 l3 white-text">
                 <div class="card-content">
-                    <span>Preço Mercadoria<br>{{mes.precoMercadoria}}</span>
+                    <span>Preço Mercadoria<br>{{mes.custoMercadoria}}</span>
                 </div>
             </div>
 

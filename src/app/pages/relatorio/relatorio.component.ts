@@ -87,10 +87,10 @@ export class RelatorioComponent {
     if (this.outros.length > 0)
       outros = this.outros.map(q => q.valor).reduce((sum, current) => sum + current);
 
-    let despesas = ((principal + outros) / this.faturamento);
+    let despesas = ((principal + outros) / this.faturamento) * 100;
 
     this.armazenarSession();
-    this.router.navigate(['/porcentagem', { despesas: despesas, somaDespesas: principal + outros }]);
+    this.router.navigate(['/custo', { despesas: despesas, somaDespesas: principal + outros }]);
 
     return false;
   }
