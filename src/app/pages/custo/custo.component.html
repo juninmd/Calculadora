@@ -10,7 +10,7 @@
             </div>
 
             <div class="row collection paddingBase">
-                <div class="col s12 m12 l3">
+                <div class="col s12 m12 l4">
                     <div class="input-field col s12 m12">
                         <input type="number" step="any" required="required" min="0" [(ngModel)]="custoMercadoria" name="custoMercadoria" id="custoMercadoria"
                             class="validate" placeholder="Exemplo: 25,00">
@@ -18,35 +18,29 @@
                     </div>
                 </div>
 
-                <div class="col s12 m12 l3">
+                <div class="col s12 m12 l4">
                     <div class="input-field col s12 m12">
-                        <input (ngModelChange)="calcularDespesas()" readonly type="number" step="any" required="required" min="0" [(ngModel)]="fixos" name="fixos" id="fixos"
-                        class="validate" placeholder="Exemplo: 25,00">
+                        <input (ngModelChange)="calcularDespesas()" readonly type="number" step="any" required="required" min="0" [(ngModel)]="despesasFixas"
+                            name="despesasFixas" id="despesasFixas" class="validate" placeholder="Exemplo: 25,00">
                         <label class="active">Custos Fixos R$</label>
                     </div>
                 </div>
 
-                <div class="col s12 m12 l3">
+                <div class="col s12 m12 l4">
                     <div class="input-field col s12 m12">
-                        <input (ngModelChange)="calcularDespesas()" type="number" readonly step="any" required="required" min="0" [(ngModel)]="variaveis" name="variaveis" id="variaveis"
+                        <input type="number" readonly step="any" required="required" min="0" [(ngModel)]="despesasVariaveis" name="despesasVariaveis" id="despesasVariaveis"
                             class="validate" placeholder="Exemplo: 25,00">
                         <label class="active">Custos Variáveis R$</label>
                     </div>
                 </div>
 
-                <div class="col s12 m12 l3">
-                    <div class="input-field col s12 m12">
-                        <input type="number" readonly step="any" required="required" min="0" [(ngModel)]="somaDespesas" name="somaDespesas" id="somaDespesas"
-                            class="validate" placeholder="Exemplo: 300">
-                        <label class="active">Soma Despesas (Custos) R$</label>
-                    </div>
-                </div>
             </div>
 
             <div class="row">
                 <div class="input-field col s12 m6 l6" *ngFor="let item of principal">
-                    <input type="number" step="any" [value]="item.valor" [(ngModel)]="item.valor" min="0" [id]="item.descricao" [name]="item.descricao"
-                        required="required" class="validate" placeholder="Exemplo: 12,00" [readonly]="item.activate">
+                    <input (ngModelChange)="calcularDespesasVariaveis()" type="number" step="any" [value]="item.valor" [(ngModel)]="item.valor"
+                        min="0" [id]="item.descricao" [name]="item.descricao" required="required" class="validate" placeholder="Exemplo: 12,00"
+                        [readonly]="item.activate">
                     <label class="active">{{item.descricao}}</label>
                 </div>
 

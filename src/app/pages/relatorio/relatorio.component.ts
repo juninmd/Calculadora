@@ -90,7 +90,7 @@ export class RelatorioComponent {
     let despesas = ((principal + outros) / this.faturamento) * 100;
 
     this.armazenarSession();
-    this.router.navigate(['/custo', { despesas: despesas, somaDespesas: principal + outros, fixos: principal, variaveis: outros }]);
+    this.router.navigate(['/custo', { despesas: despesas, despesasFixas: principal + outros}]);
 
     return false;
   }

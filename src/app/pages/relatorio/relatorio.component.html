@@ -5,7 +5,6 @@
         <div class="col s12 m6 l6">
           <h5 class="header">
             Relatório dos custos mensais
-            <a (click)="adicionar()" class="btn-floating btn-tiny waves-effect waves-light red"><i class="material-icons">add</i></a>
 
           </h5>
         </div>
@@ -19,33 +18,43 @@
         </div>
       </div>
 
-      <div class="row">
-        <div class="input-field inline col s12 m6 l6" *ngFor="let item of principal">
-          <input type="number" step="any" [value]="item.valor" [(ngModel)]="item.valor" min="0" [id]="item.descricao" [name]="item.descricao"
-            required="required" class="validate">
-          <label class="active">{{item.descricao}}</label>
-        </div>
 
-        <div *ngFor="let item of outros">
-          <div>
-            <div class="input-field inline col s12 m3 l3">
-              <label class="active">Descrição:</label>
-              <input type="text" required="required" class="validate" [(ngModel)]="item.descricao" id="{{item.descricao}}+'desc'" name="{{item.date}}+'desc'">
-            </div>
-            <div class="input-field col s9 m2 l2">
-              <label class="active">Valor:</label>
-              <input type="number" step="any" required="required" [(ngModel)]="item.valor" min="0" [id]="item.descricao" [name]="item.date"
-                class="validate">
-            </div>
-            <div class="input-field col s3 m1 l1">
-              <a (click)="remover(item)" class="btn-floating btn-tiny waves-effect waves-light red">
+      <div class="row">
+        <fieldset>
+          <caption>Despesas Fixas</caption>
+          <div class="input-field inline col s12 m6 l6" *ngFor="let item of principal">
+            <input type="number" step="any" [value]="item.valor" [(ngModel)]="item.valor" min="0" [id]="item.descricao" [name]="item.descricao"
+              required="required" class="validate">
+            <label class="active">{{item.descricao}}</label>
+          </div>
+        </fieldset>
+      </div>
+
+      <div class="row">
+        <fieldset>
+          <caption>Despesas Fixas Personalizadas</caption>
+          <h5 class="centralize" *ngIf="outros.length == 0">Você pode adicionar novas despesas clicando no botão (Adicionar despesa fixa)</h5>
+          <div *ngFor="let item of outros">
+            <div>
+              <div class="input-field inline col s12 m3 l3">
+                <label class="active">Descrição:</label>
+                <input type="text" required="required" class="validate" [(ngModel)]="item.descricao" id="{{item.descricao}}+'desc'" name="{{item.date}}+'desc'">
+              </div>
+              <div class="input-field col s9 m2 l2">
+                <label class="active">Valor:</label>
+                <input type="number" step="any" required="required" [(ngModel)]="item.valor" min="0" [id]="item.descricao" [name]="item.date"
+                  class="validate">
+              </div>
+              <div class="input-field col s3 m1 l1">
+                <a (click)="remover(item)" class="btn-floating btn-tiny waves-effect waves-light red">
                 <i class="material-icons">remove</i>
               </a>
+              </div>
             </div>
           </div>
-        </div>
-
+        </fieldset>
       </div>
+
 
       <div class="row no-space" *ngIf="exibeMensagemCarregado">
         <div class="input-field col s12 m6 l6 right">
@@ -60,8 +69,9 @@
           <button type="button" (click)="salvar()" [disabled]="!calculadoraForm.form.valid" title="Salvar formulário" class="btn-floating btn-tiny waves-effect waves-light blue"><i class="material-icons">cloud</i></button>
           <button type="submit" [disabled]="!calculadoraForm.form.valid" class="btn-floating btn-tiny waves-effect waves-light blue"><i class="material-icons">done</i></button>
         </div>
-        <div class="input-field col s3 inline left">
+        <div class="input-field col inline left">
           <a routerLink="/" class="btn btn-tiny waves-effect waves-light red"> Voltar</a>
+          <a (click)="adicionar()" class="btn btn-tiny waves-effect waves-light blue">Adicionar despesa fixa</a>
         </div>
       </div>
     </div>

@@ -10,7 +10,8 @@ export class CustoComponent implements OnInit {
 
   constructor(private route: ActivatedRoute) { }
   despesas: any = null;
-  somaDespesas: any = null;
+  despesasFixas: any = null;
+  despesasVariaveis: any = 0;
   custoMercadoria: any = '';
   pv: any = '';
   pontoEquilibrio: any = '';
@@ -18,8 +19,6 @@ export class CustoComponent implements OnInit {
   mesAtual: any = null;
   principal: any = [];
   exibeMensagemCarregado: boolean = false;
-  fixos: any = 0;
-  variaveis: any = 0;
 
   ngOnInit() {
     this.exibeMensagemCarregado = localStorage.getItem("custo") != null;
@@ -29,46 +28,40 @@ export class CustoComponent implements OnInit {
 
     this.route.params.subscribe(params => {
 
-      if (params['fixos'] != null)
-        this.fixos = +params["fixos"];
-
-      if (params['variaveis'] != null)
-        this.variaveis = +params["variaveis"];
-
       if (params['despesas'] != null)
         this.despesas = +params["despesas"];
 
-      if (params['somaDespesas'] != null)
-        this.somaDespesas = +params["somaDespesas"];
+      if (params['despesasFixas'] != null)
+        this.despesasFixas = +params["despesasFixas"];
 
       this.principal = [
         {
-          valor: null,
+          valor: 0,
           descricao: '% Simples'
         },
         {
-          valor: null,
+          valor: 0,
           descricao: '% Lucro',
           lucro: true
         },
         {
-          valor: this.despesas,
+          valor: this.despesas || 0,
           descricao: '% Despesas',
           activate: true
         },
         {
-          valor: null,
+          valor: 0,
           descricao: '% Comissão'
         },
         {
-          valor: null,
+          valor: 0,
           descricao: '% Frete'
         },
       ];
       this.loadingSave();
 
     });
-
+    this.calcularDespesasVariaveis();
   }
 
   calcularMarkup() {
@@ -81,7 +74,7 @@ export class CustoComponent implements OnInit {
   }
 
   calcularPontoEquilibrio() {
-    this.pontoEquilibrio = ((this.custoMercadoria + this.fixos) / (this.pv - this.custoMercadoria + this.variaveis)) * 100;
+    this.pontoEquilibrio = (this.despesasFixas / (this.custoMercadoria - this.despesasVariaveis));
     return false;
   }
 
@@ -133,7 +126,7 @@ export class CustoComponent implements OnInit {
       porcDespesas: this.despesas,
       custoMercadoria: this.custoMercadoria,
       porcentagens: this.principal,
-      somaDespesas: this.somaDespesas,
+      despesasFixas: this.despesasFixas,
       date: data,
       despesas: serializado.despesas,
       outrasDespesas: serializado.outrasDespesas,
@@ -141,8 +134,7 @@ export class CustoComponent implements OnInit {
       markup: this.markup,
       pv: this.pv,
       pontoEquilibrio: this.pontoEquilibrio,
-      fixos: this.fixos,
-      variaveis: this.variaveis
+      despesasVariaveis: this.despesasVariaveis
     };
 
     this.logicaMeses(objetoSalvar);
@@ -166,8 +158,8 @@ export class CustoComponent implements OnInit {
     Materialize.toast('Esse mês foi registrado com sucesso!', 5000)
   }
 
-  calcularDespesas() {
-    this.somaDespesas = this.fixos + this.variaveis;
+  calcularDespesasVariaveis() {
+    this.despesasVariaveis = this.principal.map(q => q.valor).reduce((sum, current) => sum + current);
   }
 
 }
