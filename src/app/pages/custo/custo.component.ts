@@ -14,6 +14,7 @@ export class CustoComponent implements OnInit {
   despesasVariaveis: any = 0;
   custoMercadoria: any = '';
   pv: any = '';
+  margemContribuicao: any = '';
   pontoEquilibrio: any = '';
   markup: any = '';
   mesAtual: any = null;
@@ -37,26 +38,31 @@ export class CustoComponent implements OnInit {
       this.principal = [
         {
           valor: 0,
-          descricao: '% Simples'
+          descricao: '% Simples',
+          calcular: true
         },
         {
           valor: 0,
           descricao: '% Lucro',
-          lucro: true
+          lucro: true,
+          calcular: false
         },
         {
           valor: this.despesas || 0,
           descricao: '% Despesas',
-          activate: true
+          activate: true,
+          calcular: false
         },
         {
           valor: 0,
-          descricao: '% Comissão'
+          descricao: '% Comissão',
+          calcular: true
         },
         {
           valor: 0,
-          descricao: '% Frete'
-        },
+          descricao: '% Frete',
+          calcular: true
+        }
       ];
       this.loadingSave();
 
@@ -69,12 +75,13 @@ export class CustoComponent implements OnInit {
     this.markup = (100 - principal) / 100;
 
     this.pv = (this.custoMercadoria / this.markup);
-    this.calcularPontoEquilibrio();
+    this.calcularMargemContribuicao();
+
     return false;
   }
 
   calcularPontoEquilibrio() {
-    this.pontoEquilibrio = (this.despesasFixas / (this.custoMercadoria - this.despesasVariaveis));
+    this.pontoEquilibrio = this.despesasFixas / this.margemContribuicao;
     return false;
   }
 
@@ -133,6 +140,7 @@ export class CustoComponent implements OnInit {
       faturamento: serializado.faturamento,
       markup: this.markup,
       pv: this.pv,
+      margemContribuicao: this.margemContribuicao,
       pontoEquilibrio: this.pontoEquilibrio,
       despesasVariaveis: this.despesasVariaveis
     };
@@ -158,8 +166,14 @@ export class CustoComponent implements OnInit {
     Materialize.toast('Esse mês foi registrado com sucesso!', 5000)
   }
 
+  // Calcular todas as despesas, exceto [Lucro] e [Despesa]
   calcularDespesasVariaveis() {
-    this.despesasVariaveis = this.principal.map(q => q.valor).reduce((sum, current) => sum + current);
+    this.despesasVariaveis = this.principal.filter(p => p.calcular).map(q => q.valor).reduce((sum, current) => sum + current);
+  }
+
+  calcularMargemContribuicao() {
+    this.margemContribuicao = (this.pv - this.custoMercadoria - this.despesasVariaveis) / (this.pv); 
+    this.calcularPontoEquilibrio();
   }
 
 }
