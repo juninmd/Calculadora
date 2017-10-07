@@ -29,7 +29,7 @@ export class RelatorioComponent {
     },
     {
       valor: null,
-      descricao: 'Salário + Encargos'
+      descricao: 'Salário'
     },
     {
       valor: null,
@@ -38,6 +38,126 @@ export class RelatorioComponent {
     {
       valor: null,
       descricao: 'Descartáveis'
+    },
+    {
+      valor: null,
+      descricao: 'Prolabore'
+    },
+    {
+      valor: null,
+      descricao: 'Taxa Manutenção Conta Corrente'
+    },
+    {
+      valor: null,
+      descricao: 'Taxa Cobrança'
+    },
+    {
+      valor: null,
+      descricao: 'Encargos folha de pagamento'
+    },
+    {
+      valor: null,
+      descricao: 'IPTU'
+    },
+    {
+      valor: null,
+      descricao: 'Energia Elétrica'
+    },
+    {
+      valor: null,
+      descricao: 'Imposto'
+    },
+    {
+      valor: null,
+      descricao: 'GPS'
+    },
+    {
+      valor: null,
+      descricao: 'Serviço de Acessoria Info.'
+    },
+    {
+      valor: null,
+      descricao: 'Honorário Contábil'
+    },
+    {
+      valor: null,
+      descricao: 'Depreciação'
+    },
+    {
+      valor: null,
+      descricao: 'Seguros'
+    },
+    {
+      valor: null,
+      descricao: 'Segurança Monitorada'
+    },
+    {
+      valor: null,
+      descricao: 'Despesa Administrativa Correio/Xerox'
+    },
+    {
+      valor: null,
+      descricao: 'Material Escritório'
+    },
+    {
+      valor: null,
+      descricao: 'Material Limpeza'
+    },
+    {
+      valor: null,
+      descricao: 'Material de Copa'
+    },
+    {
+      valor: null,
+      descricao: 'Mateial Gráfico'
+    },
+    {
+      valor: null,
+      descricao: 'Investimento'
+    },
+    {
+      valor: null,
+      descricao: 'Combustível'
+    },
+    {
+      valor: null,
+      descricao: 'Viagens'
+    },
+    {
+      valor: null,
+      descricao: 'Manutenção'
+    },
+    {
+      valor: null,
+      descricao: 'Divulgação'
+    },
+    {
+      valor: null,
+      descricao: 'Sindicato'
+    },
+    {
+      valor: null,
+      descricao: 'Mensalidade Ass. Comercial'
+    },
+    {
+      valor: null,
+      descricao: 'Internet'
+    },
+    {
+      valor: null,
+      descricao: 'IPVA'
+    },
+    {
+      valor: null,
+      descricao: 'Licenciamento'
+    },
+    {
+      valor: null,
+      descricao: 'INPI'
+    },
+    {
+      valor: null,
+      descricao: 'Domínio'
     },
   ];
   exibeMensagemCarregado: boolean = false;
