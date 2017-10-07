@@ -4,8 +4,6 @@
             <div class="col s12 m12 l12">
                 <h5 class="header">
                     Custo
-                    <span class="new badge red" data-badge-caption="%">Exemplo de porcentagem: 20</span>
-                    <span class="new badge blue" data-badge-caption="">Os campos (% Despesas), (Custos Fixos), (Custos Variáveis) e (Soma Despesas) são somente Leitura</span>
                 </h5>
             </div>
 
@@ -22,7 +20,7 @@
                     <div class="input-field col s12 m12">
                         <input (ngModelChange)="calcularDespesas()" readonly type="number" step="any" required="required" min="0" [(ngModel)]="despesasFixas"
                             name="despesasFixas" id="despesasFixas" class="validate" placeholder="Exemplo: 25,00">
-                        <label class="active">Custos Fixos R$</label>
+                        <label class="active">Despesas Fixas R$</label>
                     </div>
                 </div>
 
