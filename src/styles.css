@@ -48,7 +48,7 @@ body{
  
 footer.page-footer {
     padding-top: 20px;
-    background-color: #000000;
+    background-color: #ffffff;
     border-radius: 24px;
 }
 .title{
@@ -58,6 +58,7 @@ footer.page-footer {
 .input-field label{
     color: #000000;
 }
+
 .input-field label.active
 {
     font-size: 1.0rem
@@ -70,3 +71,11 @@ footer.page-footer {
 label {
     font-weight: bold;    
 }
+
+input:disabled:not([type]) + label, input[readonly="readonly"]:not([type]) + label, input[type="text"]:disabled + label, input[type="text"][readonly="readonly"] + label, input[type="password"]:disabled + label, input[type="password"][readonly="readonly"] + label, input[type="email"]:disabled + label, input[type="email"][readonly="readonly"] + label, input[type="url"]:disabled + label, input[type="url"][readonly="readonly"] + label, input[type="time"]:disabled + label, input[type="time"][readonly="readonly"] + label, input[type="date"]:disabled + label, input[type="date"][readonly="readonly"] + label, input[type="datetime"]:disabled + label, input[type="datetime"][readonly="readonly"] + label, input[type="datetime-local"]:disabled + label, input[type="datetime-local"][readonly="readonly"] + label, input[type="tel"]:disabled + label, input[type="tel"][readonly="readonly"] + label, input[type="number"]:disabled + label, input[type="number"][readonly="readonly"] + label, input[type="search"]:disabled + label, input[type="search"][readonly="readonly"] + label, textarea.materialize-textarea:disabled + label, textarea.materialize-textarea[readonly="readonly"] + label{
+    color: #000000 !important;
+}
+
+input[type="text"], input[type="number"] {
+    font-weight: bold;
+ }

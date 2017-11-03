@@ -1,8 +1,5 @@
-input[type="text"]:disabled {
-   color:white !important;
-}
-.whitesmoke{
-    color:whitesmoke !important;
+input[type="text"]:disabled, input[type="number"]:disabled {
+   color:black !important;
 }
 
 .paddingBase {
