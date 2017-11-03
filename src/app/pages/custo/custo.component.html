@@ -10,7 +10,7 @@
             <div class="row collection paddingBase">
                 <div class="col s12 m12 l4">
                     <div class="input-field col s12 m12">
-                        <input type="number" step="any" required="required" min="0" [(ngModel)]="custoMercadoria" name="custoMercadoria" id="custoMercadoria"
+                        <input (ngModelChange)="calcularDespesasVariaveis()" type="number" step="any" required="required" min="0" [(ngModel)]="custoMercadoria" name="custoMercadoria" id="custoMercadoria"
                             class="validate" placeholder="Exemplo: 25,00">
                         <label class="active">Custo da Mercadoria R$</label>
                     </div>

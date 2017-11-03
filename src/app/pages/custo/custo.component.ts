@@ -168,7 +168,7 @@ export class CustoComponent implements OnInit {
 
   // Calcular todas as despesas, exceto [Lucro] e [Despesa]
   calcularDespesasVariaveis() {
-    this.despesasVariaveis = (this.principal.filter(p => p.calcular).map(q => q.valor).reduce((sum, current) => sum + current)) / 100;
+    this.despesasVariaveis = ((this.principal.filter(p => p.calcular).map(q => q.valor).reduce((sum, current) => sum + current)) / 100) * this.custoMercadoria;
   }
 
   calcularMargemContribuicao() {
