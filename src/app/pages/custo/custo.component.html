@@ -8,29 +8,23 @@
             </div>
 
             <div class="row collection paddingBase">
-                <div class="col s12 m12 l4">
+                <div class="col s12 m12 l6">
                     <div class="input-field col s12 m12">
-                        <input (ngModelChange)="calcularDespesasVariaveis()" type="number" step="any" required="required" min="0" [(ngModel)]="custoMercadoria" name="custoMercadoria" id="custoMercadoria"
+                        <input type="number" step="any" required="required" min="0" [(ngModel)]="custoMercadoria" name="custoMercadoria" id="custoMercadoria"
                             class="validate" placeholder="Exemplo: 25,00">
                         <label class="active">Custo da Mercadoria R$</label>
                     </div>
                 </div>
 
-                <div class="col s12 m12 l4">
+                <div class="col s12 m12 l6">
                     <div class="input-field col s12 m12">
-                        <input (ngModelChange)="calcularDespesasVariaveis()" readonly type="number" step="any" required="required" min="0" [(ngModel)]="despesasFixas"
-                            name="despesasFixas" id="despesasFixas" class="validate" placeholder="Exemplo: 25,00">
+                        <input readonly type="number" step="any" required="required" min="0" [(ngModel)]="despesasFixas" name="despesasFixas" id="despesasFixas"
+                            class="validate" placeholder="Exemplo: 25,00">
                         <label class="active">Despesas Fixas R$</label>
                     </div>
                 </div>
 
-                <div class="col s12 m12 l4">
-                    <div class="input-field col s12 m12">
-                        <input type="number" readonly step="any" required="required" min="0" [(ngModel)]="despesasVariaveis" name="despesasVariaveis" id="despesasVariaveis"
-                            class="validate" placeholder="Exemplo: 25,00">
-                        <label class="active">Custos Variáveis R$</label>
-                    </div>
-                </div>
+
 
             </div>
 
@@ -46,22 +40,31 @@
             <footer class="page-footer">
                 <div class="semicontainer black-text">
                     <div class="row">
-                        <div class="input-field col s12 m3 l3">
+                        <div class="input-field col s12 m6 l4">
                             <input type="text" placeholder="Valor a ser calculado" disabled [(ngModel)]="markup" id="markup" name="markup">
                             <label class="active">Mark-UP:</label>
                         </div>
-                        <div class="input-field col s12 m3 l3">
+                        <div class="input-field col s12 m6 l4">
                             <input type="text" placeholder="Valor a ser calculado" disabled [(ngModel)]="pv" id="pv" name="pv">
                             <label class="active">Preço de Venda:</label>
                         </div>
-                        <div class="input-field col s12 m3 l3">
-                            <input type="text" placeholder="Valor a ser calculado" disabled [(ngModel)]="margemContribuicao" id="margemContribuicao" name="margemContribuicao">
+
+                        <div class="input-field col s12 m6 l4">
+                            <input type="text" placeholder="Valor a ser calculado" disabled [(ngModel)]="despesasVariaveis" name="despesasVariaveis" id="despesasVariaveis">
+                            <label class="active">Custos Variáveis R$</label>
+                        </div>
+
+                        <div class="input-field col s12 m6 l4">
+                            <input type="text" placeholder="Valor a ser calculado" disabled [(ngModel)]="margemContribuicao" id="margemContribuicao"
+                                name="margemContribuicao">
                             <label class="active">Margem de contribuição:</label>
                         </div>
-                        <div class="input-field col s12 m3 l3">
+
+                        <div class="input-field col s12 m6 l4">
                             <input type="text" placeholder="Valor a ser calculado" disabled [(ngModel)]="pontoEquilibrio" id="pontoEquilibrio" name="pontoEquilibrio">
                             <label class="active">Ponto de Equilibrio:</label>
                         </div>
+
                     </div>
                 </div>
             </footer>

@@ -11,7 +11,10 @@ export class CustoComponent implements OnInit {
   constructor(private route: ActivatedRoute) { }
   despesas: any = null;
   despesasFixas: any = null;
-  despesasVariaveis: any = 0;
+  /**
+   * Custos variáveis
+   */
+  despesasVariaveis: any = '';
   custoMercadoria: any = '';
   pv: any = '';
   margemContribuicao: any = '';
@@ -39,6 +42,7 @@ export class CustoComponent implements OnInit {
         {
           valor: 0,
           descricao: '% Simples',
+          simples: true,
           calcular: true
         },
         {
@@ -67,24 +71,9 @@ export class CustoComponent implements OnInit {
       this.loadingSave();
 
     });
-    this.calcularDespesasVariaveis();
   }
 
-  calcularMarkup() {
-    let principal = this.principal.map(q => q.valor).reduce((sum, current) => sum + current);
-    this.markup = (100 - principal) / 100;
-
-    this.pv = (this.custoMercadoria / this.markup);
-    this.calcularMargemContribuicao();
-
-    return false;
-  }
-
-  calcularPontoEquilibrio() {
-    this.pontoEquilibrio = this.despesasFixas / this.margemContribuicao;
-    return false;
-  }
-
+ 
   salvar() {
     let objetoSalvar = {
       custoMercadoria: this.custoMercadoria,
@@ -166,14 +155,34 @@ export class CustoComponent implements OnInit {
     Materialize.toast('Esse mês foi registrado com sucesso!', 5000)
   }
 
-  // Calcular todas as despesas, exceto [Lucro] e [Despesa]
+  calcularMarkup() {
+    let principal = this.principal.map(q => q.valor).reduce((sum, current) => sum + current);
+    this.markup = (100 - principal) / 100;
+
+    this.pv = (this.custoMercadoria / this.markup);
+    
+    this.calcularDespesasVariaveis();
+    
+    return false;
+  }
+
   calcularDespesasVariaveis() {
-    this.despesasVariaveis = ((this.principal.filter(p => p.calcular).map(q => q.valor).reduce((sum, current) => sum + current)) / 100) * this.custoMercadoria;
+    let simples = this.principal.filter(p => p.simples == true)[0];
+    if(!simples)
+      return;
+
+    this.despesasVariaveis = Number((this.pv * simples.valor) / 100) + this.custoMercadoria;
+    this.calcularMargemContribuicao();
   }
 
   calcularMargemContribuicao() {
-    this.margemContribuicao = (this.pv - this.custoMercadoria - this.despesasVariaveis) / (this.pv); 
+    this.margemContribuicao = (this.pv - this.despesasVariaveis) / (this.pv);
     this.calcularPontoEquilibrio();
+  }
+
+  calcularPontoEquilibrio() {
+    this.pontoEquilibrio = this.despesasFixas / this.margemContribuicao;
+    return false;
   }
 
 }
