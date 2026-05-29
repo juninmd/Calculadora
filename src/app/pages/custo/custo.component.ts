@@ -97,8 +97,8 @@ export class CustoComponent implements OnInit {
         return q;
       }
 
-      const index = objetoSalvar.principal.map(p => p.descricao).indexOf(q.descricao);
-      return objetoSalvar.principal[index];
+      const savedItem = objetoSalvar.principal.find(p => p.descricao === q.descricao);
+      return savedItem ?? q;
     });
 
     this.custoMercadoria = objetoSalvar.custoMercadoria;
@@ -155,11 +155,11 @@ export class CustoComponent implements OnInit {
 
   calcularMarkup() {
     const somaPrincipal = this.principal
-      .map(q => q.valor)
+      .map(q => Number(q.valor ?? 0))
       .reduce((sum, current) => sum + current, 0);
 
     this.markup = (100 - somaPrincipal) / 100;
-    this.pv = Number(this.custoMercadoria) / Number(this.markup);
+    this.pv = this.markup !== 0 ? Number(this.custoMercadoria) / this.markup : 0;
     this.calcularDespesasVariaveis();
 
     return false;
