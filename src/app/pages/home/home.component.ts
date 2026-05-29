@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-declare var Materialize: any;
+
+declare var Materialize: {
+  toast: (message: string, duration: number) => void;
+};
+
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -16,6 +20,6 @@ export class HomeComponent implements OnInit {
     localStorage.removeItem('custo');
     localStorage.removeItem('relatorio');
     sessionStorage.removeItem('tempRelatorio');
-    Materialize.toast('Os campos armazenados foram limpos!', 4000)
+    Materialize.toast('Os campos armazenados foram limpos!', 4000);
   }
 }

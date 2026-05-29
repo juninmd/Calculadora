@@ -1,6 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-declare var Materialize: any;
+import { DespesaItem, RelatorioStorage, TempRelatorio } from '../types';
+
+declare var Materialize: {
+  toast: (message: string, duration: number) => void;
+};
+
 @Component({
   selector: 'app-relatorio',
   templateUrl: './relatorio.component.html',
@@ -10,222 +15,111 @@ export class RelatorioComponent {
   constructor(private router: Router) {
     sessionStorage.clear();
     this.loadingSave();
-    this.exibeMensagemCarregado = localStorage.getItem("relatorio") != null;
+    this.exibeMensagemCarregado = localStorage.getItem('relatorio') != null;
   }
 
-  outros: any = [];
-  principal: any = [
-    {
-      valor: null,
-      descricao: 'Água'
-    },
-    {
-      valor: null,
-      descricao: 'Luz'
-    },
-    {
-      valor: null,
-      descricao: 'Telefone'
-    },
-    {
-      valor: null,
-      descricao: 'Salário'
-    },
-    {
-      valor: null,
-      descricao: 'Aluguel'
-    },
-    {
-      valor: null,
-      descricao: 'Descartáveis'
-    },
-    {
-      valor: null,
-      descricao: 'Prolabore'
-    },
-    {
-      valor: null,
-      descricao: 'Taxa Manutenção Conta Corrente'
-    },
-    {
-      valor: null,
-      descricao: 'Taxa Cobrança'
-    },
-    {
-      valor: null,
-      descricao: 'Encargos folha de pagamento'
-    },
-    {
-      valor: null,
-      descricao: 'IPTU'
-    },
-    {
-      valor: null,
-      descricao: 'Energia Elétrica'
-    },
-    {
-      valor: null,
-      descricao: 'Imposto'
-    },
-    {
-      valor: null,
-      descricao: 'GPS'
-    },
-    {
-      valor: null,
-      descricao: 'Serviço de Acessoria Info.'
-    },
-    {
-      valor: null,
-      descricao: 'Honorário Contábil'
-    },
-    {
-      valor: null,
-      descricao: 'Depreciação'
-    },
-    {
-      valor: null,
-      descricao: 'Seguros'
-    },
-    {
-      valor: null,
-      descricao: 'Segurança Monitorada'
-    },
-    {
-      valor: null,
-      descricao: 'Despesa Administrativa Correio/Xerox'
-    },
-    {
-      valor: null,
-      descricao: 'Material Escritório'
-    },
-    {
-      valor: null,
-      descricao: 'Material Limpeza'
-    },
-    {
-      valor: null,
-      descricao: 'Material de Copa'
-    },
-    {
-      valor: null,
-      descricao: 'Mateial Gráfico'
-    },
-    {
-      valor: null,
-      descricao: 'Investimento'
-    },
-    {
-      valor: null,
-      descricao: 'Combustível'
-    },
-    {
-      valor: null,
-      descricao: 'Viagens'
-    },
-    {
-      valor: null,
-      descricao: 'Manutenção'
-    },
-    {
-      valor: null,
-      descricao: 'Divulgação'
-    },
-    {
-      valor: null,
-      descricao: 'Sindicato'
-    },
-    {
-      valor: null,
-      descricao: 'Mensalidade Ass. Comercial'
-    },
-    {
-      valor: null,
-      descricao: 'Internet'
-    },
-    {
-      valor: null,
-      descricao: 'IPVA'
-    },
-    {
-      valor: null,
-      descricao: 'Licenciamento'
-    },
-    {
-      valor: null,
-      descricao: 'INPI'
-    },
-    {
-      valor: null,
-      descricao: 'Domínio'
-    },
+  outros: DespesaItem[] = [];
+  principal: DespesaItem[] = [
+    { valor: null, descricao: 'Água' },
+    { valor: null, descricao: 'Luz' },
+    { valor: null, descricao: 'Telefone' },
+    { valor: null, descricao: 'Salário' },
+    { valor: null, descricao: 'Aluguel' },
+    { valor: null, descricao: 'Descartáveis' },
+    { valor: null, descricao: 'Prolabore' },
+    { valor: null, descricao: 'Taxa Manutenção Conta Corrente' },
+    { valor: null, descricao: 'Taxa Cobrança' },
+    { valor: null, descricao: 'Encargos folha de pagamento' },
+    { valor: null, descricao: 'IPTU' },
+    { valor: null, descricao: 'Energia Elétrica' },
+    { valor: null, descricao: 'Imposto' },
+    { valor: null, descricao: 'GPS' },
+    { valor: null, descricao: 'Serviço de Acessoria Info.' },
+    { valor: null, descricao: 'Honorário Contábil' },
+    { valor: null, descricao: 'Depreciação' },
+    { valor: null, descricao: 'Seguros' },
+    { valor: null, descricao: 'Segurança Monitorada' },
+    { valor: null, descricao: 'Despesa Administrativa Correio/Xerox' },
+    { valor: null, descricao: 'Material Escritório' },
+    { valor: null, descricao: 'Material Limpeza' },
+    { valor: null, descricao: 'Material de Copa' },
+    { valor: null, descricao: 'Mateial Gráfico' },
+    { valor: null, descricao: 'Investimento' },
+    { valor: null, descricao: 'Combustível' },
+    { valor: null, descricao: 'Viagens' },
+    { valor: null, descricao: 'Manutenção' },
+    { valor: null, descricao: 'Divulgação' },
+    { valor: null, descricao: 'Sindicato' },
+    { valor: null, descricao: 'Mensalidade Ass. Comercial' },
+    { valor: null, descricao: 'Internet' },
+    { valor: null, descricao: 'IPVA' },
+    { valor: null, descricao: 'Licenciamento' },
+    { valor: null, descricao: 'INPI' },
+    { valor: null, descricao: 'Domínio' },
   ];
-  exibeMensagemCarregado: boolean = false;
-
-  faturamento: any = null;
+  exibeMensagemCarregado = false;
+  faturamento: number | null = null;
 
   adicionar() {
     this.outros.push({
-      valor: '',
+      valor: null,
       descricao: '',
       date: new Date()
     });
   }
 
-  remover(item: any) {
-    this.outros.splice(this.outros.indexOf(item), 1);
+  remover(item: DespesaItem) {
+    const index = this.outros.indexOf(item);
+    if (index !== -1) {
+      this.outros.splice(index, 1);
+    }
   }
 
   salvar() {
-    let objetoSalvar = {
-      faturamento: this.faturamento,
+    const objetoSalvar: RelatorioStorage = {
+      faturamento: this.faturamento ?? 0,
       principal: this.principal,
       outros: this.outros
     };
-    localStorage.setItem("relatorio", JSON.stringify(objetoSalvar));
-    Materialize.toast('Os campos foram salvos, na próxima vez que abrir a página eles vão estar carregados!', 4000)
+    localStorage.setItem('relatorio', JSON.stringify(objetoSalvar));
+    Materialize.toast('Os campos foram salvos, na próxima vez que abrir a página eles vão estar carregados!', 4000);
   }
 
   loadingSave() {
-    if (localStorage.getItem("relatorio") == null)
-      return;
-    let objetoSalvar = JSON.parse(localStorage.getItem("relatorio"));
+    const stored = localStorage.getItem('relatorio');
+    if (stored == null) return;
+
+    const objetoSalvar: RelatorioStorage = JSON.parse(stored);
     this.faturamento = objetoSalvar.faturamento;
     this.principal = objetoSalvar.principal;
-    this.outros = objetoSalvar.outros;
+    this.outros = objetoSalvar.outros ?? [];
   }
 
-  /**
-   * Primeira fórmula
-   * Soma de todos os itens / Faturamento Mensal
-   */
   calcularDespesas() {
+    const somaPrincipal = this.principal
+      .map(q => Number(q.valor ?? 0))
+      .reduce((sum, current) => sum + current, 0);
 
-    let principal = this.principal.map(q => q.valor).reduce((sum, current) => sum + current);
-    let outros = 0;
+    const somaOutros = this.outros.length > 0
+      ? this.outros.map(q => Number(q.valor ?? 0)).reduce((sum, current) => sum + current, 0)
+      : 0;
 
-    if (this.outros.length > 0)
-      outros = this.outros.map(q => q.valor).reduce((sum, current) => sum + current);
-
-    let despesas = ((principal + outros) / this.faturamento) * 100;
+    const faturamentoVal = this.faturamento ?? 0;
+    const despesas = faturamentoVal !== 0 ? ((somaPrincipal + somaOutros) / faturamentoVal) * 100 : 0;
 
     this.armazenarSession();
-    this.router.navigate(['/custo', { despesas: despesas, despesasFixas: principal + outros}]);
+    this.router.navigate(['/custo', { despesas, despesasFixas: somaPrincipal + somaOutros }]);
 
     return false;
   }
 
-  /**
-   * Armazenamos os itens em session para lermos na próxima tela
-   */
   armazenarSession() {
-    let objetoSalvar = {
+    const objetoSalvar: TempRelatorio = {
       despesas: this.principal,
       outrasDespesas: this.outros,
-      faturamento: this.faturamento
-    }
+      faturamento: this.faturamento ?? 0
+    };
 
     sessionStorage.setItem('tempRelatorio', JSON.stringify(objetoSalvar));
   }
-
 }

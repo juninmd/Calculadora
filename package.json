@@ -2,9 +2,12 @@
   "name": "calculadora",
   "version": "0.0.1",
   "license": "MIT",
+  "type": "module",
   "scripts": {
     "start": "ng server",
-    "build": "ng build"
+    "build": "ng build",
+    "build:electron": "tsc -p tsconfig.electron.json",
+    "start:electron": "npm run build:electron && electron main.js"
   },
   "main": "main.js",
   "private": true,

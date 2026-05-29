@@ -1,6 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-declare var Materialize: any;
+import { PrincipalItem, CustoStorage, TempRelatorio, MesRecord } from '../types';
+
+declare var Materialize: {
+  toast: (message: string, duration: number) => void;
+};
+
 @Component({
   selector: 'app-custo',
   templateUrl: './custo.component.html',
@@ -9,34 +14,33 @@ declare var Materialize: any;
 export class CustoComponent implements OnInit {
 
   constructor(private route: ActivatedRoute) { }
-  despesas: any = null;
-  despesasFixas: any = null;
-  /**
-   * Custos variáveis
-   */
-  despesasVariaveis: any = '';
-  custoMercadoria: any = '';
-  pv: any = '';
-  margemContribuicao: any = '';
-  pontoEquilibrio: any = '';
-  markup: any = '';
-  mesAtual: any = null;
-  principal: any = [];
-  exibeMensagemCarregado: boolean = false;
+  despesas: number | null = null;
+  despesasFixas: number | null = null;
+  despesasVariaveis: number | string = '';
+  custoMercadoria: number | string = '';
+  pv: number | string = '';
+  margemContribuicao: number | string = '';
+  pontoEquilibrio: number | string = '';
+  markup: number | string = '';
+  mesAtual: string | null = null;
+  principal: PrincipalItem[] = [];
+  exibeMensagemCarregado = false;
 
   ngOnInit() {
-    this.exibeMensagemCarregado = localStorage.getItem("custo") != null;
+    this.exibeMensagemCarregado = localStorage.getItem('custo') != null;
 
-    let date = new Date();
+    const date = new Date();
     this.mesAtual = `${date.getFullYear()}/${date.getMonth() + 1}`;
 
     this.route.params.subscribe(params => {
+      const despesasParam = params['despesas'];
+      const despesasFixasParam = params['despesasFixas'];
 
-      if (params['despesas'] != null)
-        this.despesas = +params["despesas"];
+      if (despesasParam != null)
+        this.despesas = +despesasParam;
 
-      if (params['despesasFixas'] != null)
-        this.despesasFixas = +params["despesasFixas"];
+      if (despesasFixasParam != null)
+        this.despesasFixas = +despesasFixasParam;
 
       this.principal = [
         {
@@ -52,7 +56,7 @@ export class CustoComponent implements OnInit {
           calcular: false
         },
         {
-          valor: this.despesas || 0,
+          valor: this.despesas ?? 0,
           descricao: '% Despesas',
           activate: true,
           calcular: false
@@ -69,60 +73,58 @@ export class CustoComponent implements OnInit {
         }
       ];
       this.loadingSave();
-
     });
   }
 
- 
   salvar() {
-    let objetoSalvar = {
+    const objetoSalvar: CustoStorage = {
       custoMercadoria: this.custoMercadoria,
       principal: this.principal,
     };
 
-    localStorage.setItem("custo", JSON.stringify(objetoSalvar));
-    Materialize.toast('Os campos foram salvos, na próxima vez que abrir a página eles vão estar carregados!', 4000)
+    localStorage.setItem('custo', JSON.stringify(objetoSalvar));
+    Materialize.toast('Os campos foram salvos, na próxima vez que abrir a página eles vão estar carregados!', 4000);
   }
 
   loadingSave() {
-    if (localStorage.getItem("custo") == null)
-      return;
-    let objetoSalvar = JSON.parse(localStorage.getItem("custo"));
+    const stored = localStorage.getItem('custo');
+    if (stored == null) return;
+
+    const objetoSalvar: CustoStorage = JSON.parse(stored);
 
     this.principal = this.principal.map(q => {
       if (this.despesas != null && q.activate) {
         return q;
       }
 
-      let index = objetoSalvar.principal.map(q => q.descricao).indexOf(q.descricao);
-      q = objetoSalvar.principal[index];
-      return q;
+      const savedItem = objetoSalvar.principal.find(p => p.descricao === q.descricao);
+      return savedItem ?? q;
     });
 
     this.custoMercadoria = objetoSalvar.custoMercadoria;
   }
 
   salvarMesAtual() {
-    let tempRelatorio = sessionStorage.getItem("tempRelatorio");
+    const tempRelatorio = sessionStorage.getItem('tempRelatorio');
     if (tempRelatorio == null) {
-      Materialize.toast('Para registrar esse mês, você deve primeiro calcular os itens pela tela de relatório!', 5000)
+      Materialize.toast('Para registrar esse mês, você deve primeiro calcular os itens pela tela de relatório!', 5000);
       return;
     }
 
-    if (this.pv == '') {
-      Materialize.toast('Por favor, calcule o formulário', 5000)
+    if (this.pv === '') {
+      Materialize.toast('Por favor, calcule o formulário', 5000);
       return;
     }
 
-    let serializado = JSON.parse(sessionStorage.getItem("tempRelatorio"))
+    const serializado: TempRelatorio = JSON.parse(tempRelatorio);
+    const data = new Date();
 
-    let data = new Date();
-    let objetoSalvar = {
+    const objetoSalvar: MesRecord = {
       mes: `${data.getFullYear()}/${data.getMonth() + 1}`,
-      porcDespesas: this.despesas,
+      porcDespesas: this.despesas ?? 0,
       custoMercadoria: this.custoMercadoria,
       porcentagens: this.principal,
-      despesasFixas: this.despesasFixas,
+      despesasFixas: this.despesasFixas ?? 0,
       date: data,
       despesas: serializado.despesas,
       outrasDespesas: serializado.outrasDespesas,
@@ -137,52 +139,51 @@ export class CustoComponent implements OnInit {
     this.logicaMeses(objetoSalvar);
   }
 
-  logicaMeses(mes: any) {
-    let storageMeses = localStorage.getItem("meses");
-    let meses = [];
-    if (storageMeses != null) {
-      meses = JSON.parse(storageMeses);
-    }
+  logicaMeses(mes: MesRecord) {
+    const storageMeses = localStorage.getItem('meses');
+    const meses: MesRecord[] = storageMeses ? JSON.parse(storageMeses) : [];
 
-    if (meses.filter(q => { return q.mes == mes.mes }).length > 0) {
-      Materialize.toast('Esse mês já foi registrado!', 5000)
+    if (meses.some(q => q.mes === mes.mes)) {
+      Materialize.toast('Esse mês já foi registrado!', 5000);
       return;
     }
 
     meses.push(mes);
-
     localStorage.setItem('meses', JSON.stringify(meses));
-    Materialize.toast('Esse mês foi registrado com sucesso!', 5000)
+    Materialize.toast('Esse mês foi registrado com sucesso!', 5000);
   }
 
   calcularMarkup() {
-    let principal = this.principal.map(q => q.valor).reduce((sum, current) => sum + current);
-    this.markup = (100 - principal) / 100;
+    const somaPrincipal = this.principal
+      .map(q => Number(q.valor ?? 0))
+      .reduce((sum, current) => sum + current, 0);
 
-    this.pv = (this.custoMercadoria / this.markup);
-    
+    this.markup = (100 - somaPrincipal) / 100;
+    this.pv = this.markup !== 0 ? Number(this.custoMercadoria) / this.markup : 0;
     this.calcularDespesasVariaveis();
-    
+
     return false;
   }
 
   calcularDespesasVariaveis() {
-    let simples = this.principal.filter(p => p.simples == true)[0];
-    if(!simples)
-      return;
+    const simples = this.principal.find(p => p.simples === true);
+    if (!simples) return;
 
-    this.despesasVariaveis = Number((this.pv * simples.valor) / 100) + this.custoMercadoria;
+    this.despesasVariaveis = (Number(this.pv) * simples.valor) / 100 + Number(this.custoMercadoria);
     this.calcularMargemContribuicao();
   }
 
   calcularMargemContribuicao() {
-    this.margemContribuicao = (this.pv - this.despesasVariaveis) / (this.pv);
+    const pv = Number(this.pv);
+    const dv = Number(this.despesasVariaveis);
+    this.margemContribuicao = (pv - dv) / pv;
     this.calcularPontoEquilibrio();
   }
 
   calcularPontoEquilibrio() {
-    this.pontoEquilibrio = this.despesasFixas / this.margemContribuicao;
+    const df = this.despesasFixas ?? 0;
+    const mc = Number(this.margemContribuicao);
+    this.pontoEquilibrio = mc !== 0 ? df / mc : 0;
     return false;
   }
-
 }
