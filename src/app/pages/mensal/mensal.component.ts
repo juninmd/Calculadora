@@ -1,6 +1,7 @@
 import { Component, OnInit, EventEmitter } from '@angular/core';
 import { MaterializeAction } from 'angular2-materialize';
 import { Router } from '@angular/router';
+import { MesRecord } from '../types';
 
 @Component({
   selector: 'app-mensal',
@@ -10,25 +11,26 @@ import { Router } from '@angular/router';
 export class MensalComponent implements OnInit {
   modalActions = new EventEmitter<string | MaterializeAction>();
 
-  meses: any = [];
-  mes: any = {};
+  meses: MesRecord[] = [];
+  mes: MesRecord | null = null;
 
   constructor(private router: Router) { }
 
   ngOnInit() {
-    let storageMeses = localStorage.getItem("meses");
+    const storageMeses = localStorage.getItem('meses');
     if (storageMeses != null) {
       this.meses = JSON.parse(storageMeses);
     }
   }
 
-  openModal(mes: any) {
+  openModal(mes: MesRecord) {
     this.mes = mes;
-    this.modalActions.emit({ action: "modal", params: ['open'] });
+    this.modalActions.emit({ action: 'modal', params: ['open'] });
   }
+
   closeModal() {
     this.router.navigate(['/']);
-    this.modalActions.emit({ action: "modal", params: ['close'] });
+    this.modalActions.emit({ action: 'modal', params: ['close'] });
   }
 
   limpar() {
