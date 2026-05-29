@@ -1,5 +1,7 @@
 # Calculadora
 
+[![CI/CD Pipeline](https://github.com/juninmd/Calculadora/actions/workflows/ci.yml/badge.svg)](https://github.com/juninmd/Calculadora/actions/workflows/ci.yml)
+
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.0.0-rc.1.
 
 ## Development server
@@ -21,6 +23,21 @@ Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.
 
 Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
 Before running the tests make sure you are serving the app via `ng serve`.
+
+## CI/CD Pipeline
+
+This project uses GitHub Actions for continuous integration and deployment. The pipeline includes:
+
+- **Linting**: Code quality checks
+- **Testing**: Unit and end-to-end tests with coverage reporting
+- **Building**: Production-ready builds
+- **Deployment**: Automated deployment to staging and production
+
+The pipeline runs on:
+- Push to `main` and `develop` branches
+- Pull requests targeting `main`
+
+See [.github/workflows/ci.yml](.github/workflows/ci.yml) for details.
 
 ## Further help
 

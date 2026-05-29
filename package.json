@@ -7,7 +7,8 @@
     "start": "ng server",
     "build": "ng build",
     "build:electron": "tsc -p tsconfig.electron.json",
-    "start:electron": "npm run build:electron && electron main.js"
+    "start:electron": "npm run build:electron && electron main.js",
+    "lint": "ng lint"
   },
   "main": "main.js",
   "private": true,
