@@ -97,14 +97,15 @@ export class RelatorioComponent {
 
   calcularDespesas() {
     const somaPrincipal = this.principal
-      .map(q => q.valor ?? 0)
+      .map(q => Number(q.valor ?? 0))
       .reduce((sum, current) => sum + current, 0);
 
     const somaOutros = this.outros.length > 0
-      ? this.outros.map(q => q.valor ?? 0).reduce((sum, current) => sum + current, 0)
+      ? this.outros.map(q => Number(q.valor ?? 0)).reduce((sum, current) => sum + current, 0)
       : 0;
 
-    const despesas = ((somaPrincipal + somaOutros) / (this.faturamento ?? 1)) * 100;
+    const faturamentoVal = this.faturamento ?? 0;
+    const despesas = faturamentoVal !== 0 ? ((somaPrincipal + somaOutros) / faturamentoVal) * 100 : 0;
 
     this.armazenarSession();
     this.router.navigate(['/custo', { despesas, despesasFixas: somaPrincipal + somaOutros }]);
