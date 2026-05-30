@@ -10,18 +10,18 @@ Thank you for considering contributing to Calculadora! Please read this document
 4. Ensure all tests pass and code follows linting rules
 5. Submit a pull request to the `develop` branch
 
-## CI/CD Pipeline
+  ## CI/CD Pipeline
 
-Our project uses GitHub Actions for continuous integration and deployment. The pipeline runs on every push and pull request to `main` and `develop` branches.
+  Our project uses GitHub Actions for continuous integration and deployment. The pipeline runs on every push and pull request to `main` and `develop` branches.
 
-### Stages
+  ### Stages
 
-1. **Lint**: Runs tslint to ensure code quality
-2. **Type Check**: Validates TypeScript correctness
-3. **Security**: Scans for dependency vulnerabilities
-4. **Test**: Runs unit tests with Karma/Jasmine (80%+ coverage goal) and end-to-end tests
-5. **Build**: Creates a production build with source maps and optimization
-6. **Deploy**: Deploys to staging for PRs targeting main branch, production deployment requires manual approval on main branch pushes
+  1. **Lint**: Runs tslint to ensure code quality
+  2. **Type Check**: Validates TypeScript correctness
+  3. **Security**: Scans for dependency vulnerabilities
+  4. **Test**: Runs unit tests with Karma/Jasmine (80%+ coverage goal) and end-to-end tests. Enforces minimum 80% coverage for statements, branches, functions, and lines. Uploads test and coverage reports as artifacts.
+  5. **Build**: Creates a production build with source maps and optimization
+  6. **Deploy**: Deploys to staging for PRs targeting main branch, production deployment requires manual approval on main branch pushes
 
 ### Quality Gates
 
