@@ -28,7 +28,7 @@ Before running the tests make sure you are serving the app via `ng serve`.
 
 This project uses GitHub Actions for continuous integration and deployment.
 The pipeline includes:
-- **Linting**: Code quality checks using tslint and prettier
+- **Linting**: Code quality checks using tslint
 - **Type Checking**: Ensures TypeScript correctness
 - **Security**: Dependency vulnerability scanning
 - **Testing**: Unit tests with Karma/Jasmine (80%+ coverage goal) and end-to-end tests
