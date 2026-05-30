@@ -16,17 +16,21 @@ Our project uses GitHub Actions for continuous integration and deployment. The p
 
 ### Stages
 
-1. **Lint**: Runs tslint to ensure code quality
-2. **Test**: Runs unit tests with Karma/Jasmine and uploads coverage to Codecov
-3. **Build**: Creates a production build with source maps
-4. **Deploy**: Deploys to staging when merging to `main` (production deployment requires manual approval)
+1. **Lint**: Runs tslint and prettier to ensure code quality and formatting
+2. **Type Check**: Validates TypeScript correctness
+3. **Security**: Scans for dependency vulnerabilities
+4. **Test**: Runs unit tests with Karma/Jasmine (80%+ coverage goal) and end-to-end tests
+5. **Build**: Creates a production build with source maps and optimization
+6. **Deploy**: Deploys to staging for PRs targeting main branch, production deployment requires manual approval on main branch pushes
 
 ### Quality Gates
 
 - Minimum 80% code coverage
 - No linting errors
+- No TypeScript errors
+- Successful security scan
 - Successful build
-- Passing unit tests
+- Passing unit and end-to-end tests
 
 ## Reporting Issues
 

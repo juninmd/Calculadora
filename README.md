@@ -28,10 +28,12 @@ Before running the tests make sure you are serving the app via `ng serve`.
 
 This project uses GitHub Actions for continuous integration and deployment.
 The pipeline includes:
-- **Linting**: Code quality checks using tslint
-- **Testing**: Unit tests with Karma and Jasmine, aiming for 80%+ coverage
-- **Building**: Production build with source maps
-- **Deployment**: Automatic deployment to staging on PR merge to main branch (manual approval for production)
+- **Linting**: Code quality checks using tslint and prettier
+- **Type Checking**: Ensures TypeScript correctness
+- **Security**: Dependency vulnerability scanning
+- **Testing**: Unit tests with Karma/Jasmine (80%+ coverage goal) and end-to-end tests
+- **Building**: Production build with source maps and optimization
+- **Deployment**: Automatic deployment to staging for PRs targeting main, manual approval for production
 
 To contribute, please read the [CONTRIBUTING.md](CONTRIBUTING.md) for details on our code review process.
 
