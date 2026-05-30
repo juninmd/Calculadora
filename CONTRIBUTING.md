@@ -16,7 +16,7 @@ Our project uses GitHub Actions for continuous integration and deployment. The p
 
 ### Stages
 
-1. **Lint**: Runs tslint and prettier to ensure code quality and formatting
+1. **Lint**: Runs tslint to ensure code quality
 2. **Type Check**: Validates TypeScript correctness
 3. **Security**: Scans for dependency vulnerabilities
 4. **Test**: Runs unit tests with Karma/Jasmine (80%+ coverage goal) and end-to-end tests
