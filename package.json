@@ -3,14 +3,15 @@
   "version": "0.0.1",
   "license": "MIT",
   "type": "module",
-"scripts": {
-     "start": "ng server",
-     "build": "ng build",
-     "build:electron": "tsc -p tsconfig.electron.json",
-     "start:electron": "npm run build:electron && electron main.js",
-     "test": "ng test --watch=false --browsers=ChromeHeadless",
-     "lint": "ng lint"
-   },
+  "scripts": {
+    "start": "ng server",
+    "build": "ng build",
+    "build:electron": "tsc -p tsconfig.electron.json",
+    "start:electron": "npm run build:electron && electron main.js",
+    "test": "ng test --watch=false --browsers=ChromeHeadless",
+    "lint": "ng lint",
+    "e2e": "ng e2e"
+  },
   "main": "main.js",
   "private": true,
   "dependencies": {
