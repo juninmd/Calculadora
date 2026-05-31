@@ -23,7 +23,7 @@ jobs:
       - name: Check Code Formatting
         run: npx prettier --check "src/**/*.{ts,html,css,scss,json}"
 
-    test:
+  test:
     runs-on: ubuntu-latest
     needs: lint
     steps:
@@ -230,6 +230,20 @@ jobs:
           payload: |
             {
               "text": ":warning: Production deployment failed - initiating rollback\nRepo: ${{ github.repository }}\nCommit: ${{ github.sha }}\n<${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}|View Workflow>"
+            }
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+
+  notify-failure:
+    runs-on: ubuntu-latest
+    if: failure()
+    needs: [lint, test, type-check, security, build, deploy-staging, deploy-production, rollback]
+    steps:
+      - uses: slackapi/slack-github-action@v1.22.0
+        with:
+          payload: |
+            {
+              "text": ":rotating_light: CI/CD pipeline failed for ${{ github.repository }}\nCommit: ${{ github.sha }}\n<${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}|View Workflow>"
             }
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
