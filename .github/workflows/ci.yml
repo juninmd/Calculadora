@@ -233,3 +233,18 @@ jobs:
             }
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+
+  notify-failure:
+    runs-on: ubuntu-latest
+    if: failure()
+    needs: [lint, test, type-check, security, build]
+    steps:
+      - name: Notify Failure
+        uses: slackapi/slack-github-action@v1.22.0
+        with:
+          payload: |
+            {
+              "text": ":x: CI/CD Pipeline failed\nRepo: ${{ github.repository }}\nWorkflow: ${{ github.workflow }}\nRun: ${{ github.run_number }}\n<${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}|View Workflow>"
+            }
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
