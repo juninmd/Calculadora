@@ -41,6 +41,11 @@ To enable the full CI/CD pipeline, the following repository secrets must be conf
 - `CODECOV_TOKEN`: Token for uploading coverage reports to Codecov
 - `SLACK_WEBHOOK_URL`: Webhook URL for Slack notifications on deployment status
 
+### Deployment Process
+1. **Staging Deployment**: Automatically deployed when a pull request targets the `main` branch
+2. **Production Deployment**: Requires manual approval and occurs when changes are pushed to the `main` branch
+3. **Rollback**: Automatically triggered if production deployment fails
+
 ## Contributing
 Please read the [CONTRIBUTING.md](CONTRIBUTING.md) for details on our code review process, CI/CD pipeline, and development workflow.
 

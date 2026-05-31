@@ -40,7 +40,7 @@ jobs:
       - name: Check Coverage Threshold
         run: |
           # Check if coverage is at least 80% for statements, branches, functions, lines
-          npx istanbul check-coverage --statements 80 --branches 80 --functions 80 --lines 80 ./coverage/lcov.info || echo "Coverage check failed"
+          npx istanbul check-coverage --statements 80 --branches 80 --functions 80 --lines 80 ./coverage/lcov.info
       - name: Run End-to-End Tests
         run: npm run e2e
       - name: Upload Test Reports
@@ -60,7 +60,7 @@ jobs:
           files: ./coverage/lcov.info
           flags: unittests
           name: codecov-umbrella
-          fail_ci_if_error: false
+          fail_ci_if_error: true
       - name: Upload Test Reports Artifact
         uses: actions/upload-artifact@v3
         with:
