@@ -35,8 +35,14 @@ The pipeline includes:
 - **Building**: Production build with source maps and optimization
 - **Deployment**: Automatic deployment to staging for PRs targeting main, manual approval for production
 
-To contribute, please read the [CONTRIBUTING.md](CONTRIBUTING.md) for details on our code review process.
+### Required Secrets
+To enable the full CI/CD pipeline, the following repository secrets must be configured:
+
+- `CODECOV_TOKEN`: Token for uploading coverage reports to Codecov
+- `SLACK_WEBHOOK_URL`: Webhook URL for Slack notifications on deployment status
+
+## Contributing
+Please read the [CONTRIBUTING.md](CONTRIBUTING.md) for details on our code review process, CI/CD pipeline, and development workflow.
 
 ## Further help
-
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
