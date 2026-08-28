@@ -7,8 +7,8 @@ describe('calculadora App', () => {
     page = new CalculadoraPage();
   });
 
-  it('should display message saying app works', () => {
+  it('should display the application header', () => {
     page.navigateTo();
-    expect(page.getParagraphText()).toEqual('app works!');
+    expect(page.getHeaderText()).toEqual('Sistema de Informação');
   });
 });
