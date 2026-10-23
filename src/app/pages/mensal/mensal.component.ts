@@ -1,7 +1,7 @@
 import { Component, OnInit, EventEmitter } from '@angular/core';
 import { MaterializeAction } from 'angular2-materialize';
 import { Router } from '@angular/router';
-import { MesRecord } from '../types';
+import { MesRecord } from '../../types';
 
 @Component({
   selector: 'app-mensal',

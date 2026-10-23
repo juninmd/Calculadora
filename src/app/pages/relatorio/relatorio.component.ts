@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { DespesaItem, RelatorioStorage, TempRelatorio } from '../types';
+import { DespesaItem, RelatorioStorage, TempRelatorio } from '../../types';
 
 declare var Materialize: {
   toast: (message: string, duration: number) => void;
@@ -117,7 +117,7 @@ export class RelatorioComponent {
     const objetoSalvar: TempRelatorio = {
       despesas: this.principal,
       outrasDespesas: this.outros,
-      faturamento: this.faturamento ?? 0
+      faturamento: this.faturamento != null ? this.faturamento : 0
     };
 
     sessionStorage.setItem('tempRelatorio', JSON.stringify(objetoSalvar));
