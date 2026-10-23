@@ -40,8 +40,13 @@ module.exports = function (config) {
     autoWatch: true,
     customLaunchers: {
       ChromeHeadlessNoSandbox: {
-        base: 'ChromeHeadless',
-        flags: ['--no-sandbox', '--disable-gpu']
+        base: 'Chrome',
+        flags: [
+          '--headless',
+          '--disable-gpu',
+          '--no-sandbox',
+          '--remote-debugging-port=9222'
+        ]
       }
     },
     browsers: ['ChromeHeadlessNoSandbox'],
