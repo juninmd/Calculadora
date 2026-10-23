@@ -5,6 +5,7 @@ import { Subject } from 'rxjs/Subject';
 import { CustoComponent } from './custo.component';
 import { MesRecord } from '../types';
 
+let toastSpy: any;
 declare var Materialize: {
   toast: (message: string, duration: number) => void;
 };
@@ -12,7 +13,6 @@ declare var Materialize: {
 describe('CustoComponent', () => {
   let component: CustoComponent;
   let fixture: ComponentFixture<CustoComponent>;
-  let toastSpy: jasmine.Spy;
   let paramsSubject: Subject<any>;
 
   beforeEach(async(() => {
