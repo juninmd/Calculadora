@@ -3,7 +3,7 @@ import { async, TestBed } from '@angular/core/testing';
 import { Router } from '@angular/router';
 
 import { RelatorioComponent } from './relatorio.component';
-import { DespesaItem } from '../types';
+import { DespesaItem } from '../../types';
 
 describe('RelatorioComponent', () => {
   let component: RelatorioComponent;

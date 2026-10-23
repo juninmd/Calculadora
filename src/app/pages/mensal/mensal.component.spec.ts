@@ -2,7 +2,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { Router } from '@angular/router';
 
 import { MensalComponent } from './mensal.component';
-import { MesRecord } from '../types';
+import { MesRecord } from '../../types';
 
 describe('MensalComponent', () => {
   let component: MensalComponent;
