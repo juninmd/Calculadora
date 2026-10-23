@@ -56,7 +56,7 @@ export class CustoComponent implements OnInit {
           calcular: false
         },
         {
-          valor: this.despesas ?? 0,
+          valor: this.despesas != null ? this.despesas : 0,
           descricao: '% Despesas',
           activate: true,
           calcular: false
@@ -98,7 +98,7 @@ export class CustoComponent implements OnInit {
       }
 
       const savedItem = objetoSalvar.principal.find(p => p.descricao === q.descricao);
-      return savedItem ?? q;
+      return savedItem != null ? savedItem : q;
     });
 
     this.custoMercadoria = objetoSalvar.custoMercadoria;
@@ -121,7 +121,7 @@ export class CustoComponent implements OnInit {
 
     const objetoSalvar: MesRecord = {
       mes: `${data.getFullYear()}/${data.getMonth() + 1}`,
-      porcDespesas: this.despesas ?? 0,
+      porcDespesas: this.despesas != null ? this.despesas : 0,
       custoMercadoria: this.custoMercadoria,
       porcentagens: this.principal,
       despesasFixas: this.despesasFixas ?? 0,
