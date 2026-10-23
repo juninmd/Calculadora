@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { DespesaItem, RelatorioStorage, TempRelatorio } from '../types';
+import { DespesaItem, RelatorioStorage, TempRelatorio } from '../../types';
 
 declare var Materialize: {
   toast: (message: string, duration: number) => void;
@@ -77,7 +77,7 @@ export class RelatorioComponent {
 
   salvar() {
     const objetoSalvar: RelatorioStorage = {
-      faturamento: this.faturamento ?? 0,
+      faturamento: this.faturamento != null ? this.faturamento : 0,
       principal: this.principal,
       outros: this.outros
     };
@@ -92,19 +92,19 @@ export class RelatorioComponent {
     const objetoSalvar: RelatorioStorage = JSON.parse(stored);
     this.faturamento = objetoSalvar.faturamento;
     this.principal = objetoSalvar.principal;
-    this.outros = objetoSalvar.outros ?? [];
+    this.outros = objetoSalvar.outros != null ? objetoSalvar.outros : [];
   }
 
   calcularDespesas() {
     const somaPrincipal = this.principal
-      .map(q => Number(q.valor ?? 0))
+      .map(q => Number(q.valor != null ? q.valor : 0))
       .reduce((sum, current) => sum + current, 0);
 
     const somaOutros = this.outros.length > 0
-      ? this.outros.map(q => Number(q.valor ?? 0)).reduce((sum, current) => sum + current, 0)
+      ? this.outros.map(q => Number(q.valor != null ? q.valor : 0)).reduce((sum, current) => sum + current, 0)
       : 0;
 
-    const faturamentoVal = this.faturamento ?? 0;
+    const faturamentoVal = this.faturamento != null ? this.faturamento : 0;
     const despesas = faturamentoVal !== 0 ? ((somaPrincipal + somaOutros) / faturamentoVal) * 100 : 0;
 
     this.armazenarSession();
@@ -117,7 +117,7 @@ export class RelatorioComponent {
     const objetoSalvar: TempRelatorio = {
       despesas: this.principal,
       outrasDespesas: this.outros,
-      faturamento: this.faturamento ?? 0
+      faturamento: this.faturamento != null ? this.faturamento : 0
     };
 
     sessionStorage.setItem('tempRelatorio', JSON.stringify(objetoSalvar));

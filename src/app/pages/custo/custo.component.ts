@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { PrincipalItem, CustoStorage, TempRelatorio, MesRecord } from '../types';
+import { PrincipalItem, CustoStorage, TempRelatorio, MesRecord } from '../../types';
 
 declare var Materialize: {
   toast: (message: string, duration: number) => void;
@@ -56,7 +56,7 @@ export class CustoComponent implements OnInit {
           calcular: false
         },
         {
-          valor: this.despesas ?? 0,
+          valor: this.despesas != null ? this.despesas : 0,
           descricao: '% Despesas',
           activate: true,
           calcular: false
@@ -98,7 +98,7 @@ export class CustoComponent implements OnInit {
       }
 
       const savedItem = objetoSalvar.principal.find(p => p.descricao === q.descricao);
-      return savedItem ?? q;
+      return savedItem != null ? savedItem : q;
     });
 
     this.custoMercadoria = objetoSalvar.custoMercadoria;
@@ -121,10 +121,10 @@ export class CustoComponent implements OnInit {
 
     const objetoSalvar: MesRecord = {
       mes: `${data.getFullYear()}/${data.getMonth() + 1}`,
-      porcDespesas: this.despesas ?? 0,
+      porcDespesas: this.despesas != null ? this.despesas : 0,
       custoMercadoria: this.custoMercadoria,
       porcentagens: this.principal,
-      despesasFixas: this.despesasFixas ?? 0,
+      despesasFixas: this.despesasFixas != null ? this.despesasFixas : 0,
       date: data,
       despesas: serializado.despesas,
       outrasDespesas: serializado.outrasDespesas,
@@ -155,7 +155,7 @@ export class CustoComponent implements OnInit {
 
   calcularMarkup() {
     const somaPrincipal = this.principal
-      .map(q => Number(q.valor ?? 0))
+      .map(q => Number(q.valor != null ? q.valor : 0))
       .reduce((sum, current) => sum + current, 0);
 
     this.markup = (100 - somaPrincipal) / 100;
@@ -181,7 +181,7 @@ export class CustoComponent implements OnInit {
   }
 
   calcularPontoEquilibrio() {
-    const df = this.despesasFixas ?? 0;
+    const df = this.despesasFixas != null ? this.despesasFixas : 0;
     const mc = Number(this.margemContribuicao);
     this.pontoEquilibrio = mc !== 0 ? df / mc : 0;
     return false;

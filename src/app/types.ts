@@ -40,9 +40,9 @@ export interface MesRecord {
   despesas: DespesaItem[];
   outrasDespesas: DespesaItem[];
   faturamento: number;
-  markup: number;
+  markup: number | string;
   pv: number | string;
-  margemContribuicao: number;
-  pontoEquilibrio: number;
+  margemContribuicao: number | string;
+  pontoEquilibrio: number | string;
   despesasVariaveis: number | string;
 }
