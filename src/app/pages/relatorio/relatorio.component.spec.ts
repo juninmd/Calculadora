@@ -1,5 +1,6 @@
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { async, TestBed } from '@angular/core/testing';
+import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 
 import { RelatorioComponent } from './relatorio.component';
@@ -19,6 +20,7 @@ describe('RelatorioComponent', () => {
 
     TestBed.configureTestingModule({
       declarations: [RelatorioComponent],
+      imports: [FormsModule],
       providers: [{ provide: Router, useValue: { navigate: navigateSpy } }],
       schemas: [CUSTOM_ELEMENTS_SCHEMA]
     }).compileComponents();

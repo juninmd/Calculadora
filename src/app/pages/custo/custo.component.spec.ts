@@ -1,4 +1,5 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { FormsModule } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Subject } from 'rxjs/Subject';
 
@@ -22,6 +23,7 @@ describe('CustoComponent', () => {
 
     TestBed.configureTestingModule({
       declarations: [CustoComponent],
+      imports: [FormsModule],
       providers: [
         {
           provide: ActivatedRoute,
@@ -34,9 +36,11 @@ describe('CustoComponent', () => {
   beforeEach(() => {
     localStorage.clear();
     sessionStorage.clear();
-    paramsSubject.next({});
     fixture = TestBed.createComponent(CustoComponent);
     component = fixture.componentInstance;
+    // ngOnInit assina route.params; o emit precisa vir depois da assinatura
+    fixture.detectChanges();
+    paramsSubject.next({});
     fixture.detectChanges();
   });
 
@@ -118,7 +122,7 @@ describe('CustoComponent', () => {
     it('calcularDespesasVariaveis should use simples percentage', () => {
       component.calcularMarkup();
       component.calcularDespesasVariaveis();
-      const expected = (component.pv * 5) / 100 + 100;
+      const expected = (Number(component.pv) * 5) / 100 + 100;
       expect(component.despesasVariaveis).toBeCloseTo(expected, 2);
     });
 

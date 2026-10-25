@@ -37,16 +37,16 @@
 <!-- Modal Structure -->
 <div id="modal1" class="modal" materialize="modal" [materializeParams]="[{dismissible: false}]" [materializeActions]="modalActions">
     <div class="modal-content">
-        <h4 class="header">Despesas - {{mes.mes}}</h4>
+        <h4 class="header">Despesas - {{mes?.mes}}</h4>
 
         <div class="row">
-            <div class="card col s3 m3 l3 white-text" *ngFor="let x of mes.despesas">
+            <div class="card col s3 m3 l3 white-text" *ngFor="let x of mes?.despesas">
                 <div class="card-content">
                     <span>{{x.descricao}}<br>{{x.valor}}</span>
                 </div>
             </div>
 
-            <div class="card col s3 m3 l3 white-text" *ngFor="let x of mes.outrasDespesas">
+            <div class="card col s3 m3 l3 white-text" *ngFor="let x of mes?.outrasDespesas">
                 <div class="card-content">
                     <span>{{x.descricao}}<br>{{x.valor}}</span>
                 </div>
@@ -55,7 +55,7 @@
 
         <h4 class="header">Porcentagens</h4>
         <div class="row">
-            <div class="card col s3 m3 l3 white-text" *ngFor="let x of mes.porcentagens">
+            <div class="card col s3 m3 l3 white-text" *ngFor="let x of mes?.porcentagens">
                 <div class="card-content">
                     <span>{{x.descricao}}<br>{{x.valor}}</span>
                 </div>
@@ -67,38 +67,38 @@
         <div class="row">
             <div class="card col s3 m3 l3 white-text">
                 <div class="card-content">
-                    <span>Preço Mercadoria<br>{{mes.custoMercadoria}}</span>
+                    <span>Preço Mercadoria<br>{{mes?.custoMercadoria}}</span>
                 </div>
             </div>
 
             <div class="card col s3 m3 l3 white-text">
                 <div class="card-content">
-                    <span>Faturamento<br>{{mes.faturamento}}</span>
+                    <span>Faturamento<br>{{mes?.faturamento}}</span>
                 </div>
             </div>
 
             <div class="card col s3 m3 l3 white-text">
                 <div class="card-content">
-                    <span>Preço de Venda<br>{{mes.pv}}</span>
+                    <span>Preço de Venda<br>{{mes?.pv}}</span>
                 </div>
             </div>
 
             <div class="card col s3 m3 l3 white-text">
                 <div class="card-content">
-                    <span>Markup<br>{{mes.markup}}</span>
+                    <span>Markup<br>{{mes?.markup}}</span>
                 </div>
             </div>
 
             <div class="card col s3 m3 l3 white-text">
                 <div class="card-content">
-                    <span>Margem de Contribuição<br>{{mes.margemContribuicao}}</span>
+                    <span>Margem de Contribuição<br>{{mes?.margemContribuicao}}</span>
                 </div>
             </div>
 
             
             <div class="card col s3 m3 l3 white-text">
                 <div class="card-content">
-                    <span>Ponto Equilibrio<br>{{mes.pontoEquilibrio}}</span>
+                    <span>Ponto Equilibrio<br>{{mes?.pontoEquilibrio}}</span>
                 </div>
             </div>
 
