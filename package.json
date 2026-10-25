@@ -8,7 +8,7 @@
     "build": "ng build",
     "build:electron": "tsc -p tsconfig.electron.json",
     "start:electron": "npm run build:electron && electron main.js",
-    "test": "ng test --watch=false --browsers=ChromeHeadless",
+    "test": "ng test --watch=false --browsers=ChromeHeadlessNoSandbox",
     "lint": "ng lint",
     "e2e": "ng e2e"
   },
